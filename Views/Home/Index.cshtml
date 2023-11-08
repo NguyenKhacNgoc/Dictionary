@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "HAPNDictionary";
+}
+<style>
+    .dictionary-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .search-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    #search-input {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #search-button {
+        background-color: #0077cc;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        #search-button:hover {
+            background-color: #005599;
+        }
+
+    #result {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+<div class="dictionary-container">
+    <h1>HAPNDictionary</h1>
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Nhấp vào đây...">
+        <button id="search-button">Tra cứu</button>
+    </div>
+    <div id="result">
+        <!-- Kết quả tra cứu sẽ hiển thị ở đây -->
+    </div>
+</div>

@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DictionaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblHistory_add">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_user" Type="int" />
+          <Property Name="Id_word" Type="int" />
+          <Property Name="dDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblHistory_search">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_user" Type="int" />
+          <Property Name="Id_word" Type="int" />
+          <Property Name="dDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tblLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sLanguage" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sEmail" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sPasswordHash" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sSalt" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="sRole" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Language" Type="int" />
+          <Property Name="Id_wordtype" Type="int" />
+          <Property Name="Id_user" Type="int" />
+          <Property Name="sWord" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="sExample" Type="nvarchar" MaxLength="255" />
+          <Property Name="sDefinition" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblWord_type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sWordtype" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblHistor__Id_wo__4316F928">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+          <End Role="tblHistory_search" Type="Self.tblHistory_search" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblHistory_search">
+              <PropertyRef Name="Id_word" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblHistor__Id_wo__46E78A0C">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+          <End Role="tblHistory_add" Type="Self.tblHistory_add" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblHistory_add">
+              <PropertyRef Name="Id_word" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblWord__Id_Lang__3D5E1FD2">
+          <End Role="tblLanguage" Type="Self.tblLanguage" Multiplicity="0..1" />
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblWord">
+              <PropertyRef Name="Id_Language" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblWord__Id_word__3E52440B">
+          <End Role="tblWord_type" Type="Self.tblWord_type" Multiplicity="0..1" />
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWord_type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblWord">
+              <PropertyRef Name="Id_wordtype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DictionaryModelStoreContainer">
+          <EntitySet Name="tblHistory_add" EntityType="Self.tblHistory_add" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHistory_search" EntityType="Self.tblHistory_search" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblLanguage" EntityType="Self.tblLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWord" EntityType="Self.tblWord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblWord_type" EntityType="Self.tblWord_type" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblHistor__Id_wo__4316F928" Association="Self.FK__tblHistor__Id_wo__4316F928">
+            <End Role="tblWord" EntitySet="tblWord" />
+            <End Role="tblHistory_search" EntitySet="tblHistory_search" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblHistor__Id_wo__46E78A0C" Association="Self.FK__tblHistor__Id_wo__46E78A0C">
+            <End Role="tblWord" EntitySet="tblWord" />
+            <End Role="tblHistory_add" EntitySet="tblHistory_add" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblWord__Id_Lang__3D5E1FD2" Association="Self.FK__tblWord__Id_Lang__3D5E1FD2">
+            <End Role="tblLanguage" EntitySet="tblLanguage" />
+            <End Role="tblWord" EntitySet="tblWord" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblWord__Id_word__3E52440B" Association="Self.FK__tblWord__Id_word__3E52440B">
+            <End Role="tblWord_type" EntitySet="tblWord_type" />
+            <End Role="tblWord" EntitySet="tblWord" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DictionaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblHistory_add">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_user" Type="Int32" />
+          <Property Name="Id_word" Type="Int32" />
+          <Property Name="dDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblWord" Relationship="Self.FK__tblHistor__Id_wo__46E78A0C" FromRole="tblHistory_add" ToRole="tblWord" />
+        </EntityType>
+        <EntityType Name="tblHistory_search">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_user" Type="Int32" />
+          <Property Name="Id_word" Type="Int32" />
+          <Property Name="dDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tblWord" Relationship="Self.FK__tblHistor__Id_wo__4316F928" FromRole="tblHistory_search" ToRole="tblWord" />
+        </EntityType>
+        <EntityType Name="tblLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_Lang__3D5E1FD2" FromRole="tblLanguage" ToRole="tblWord" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sPasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sSalt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblWord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Language" Type="Int32" />
+          <Property Name="Id_wordtype" Type="Int32" />
+          <Property Name="Id_user" Type="Int32" />
+          <Property Name="sWord" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sExample" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="sDefinition" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblHistory_add" Relationship="Self.FK__tblHistor__Id_wo__46E78A0C" FromRole="tblWord" ToRole="tblHistory_add" />
+          <NavigationProperty Name="tblHistory_search" Relationship="Self.FK__tblHistor__Id_wo__4316F928" FromRole="tblWord" ToRole="tblHistory_search" />
+          <NavigationProperty Name="tblLanguage" Relationship="Self.FK__tblWord__Id_Lang__3D5E1FD2" FromRole="tblWord" ToRole="tblLanguage" />
+          <NavigationProperty Name="tblWord_type" Relationship="Self.FK__tblWord__Id_word__3E52440B" FromRole="tblWord" ToRole="tblWord_type" />
+        </EntityType>
+        <EntityType Name="tblWord_type">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sWordtype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_word__3E52440B" FromRole="tblWord_type" ToRole="tblWord" />
+        </EntityType>
+        <Association Name="FK__tblHistor__Id_wo__46E78A0C">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+          <End Role="tblHistory_add" Type="Self.tblHistory_add" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblHistory_add">
+              <PropertyRef Name="Id_word" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblHistor__Id_wo__4316F928">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+          <End Role="tblHistory_search" Type="Self.tblHistory_search" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWord">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblHistory_search">
+              <PropertyRef Name="Id_word" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblWord__Id_Lang__3D5E1FD2">
+          <End Role="tblLanguage" Type="Self.tblLanguage" Multiplicity="0..1" />
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblWord">
+              <PropertyRef Name="Id_Language" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblWord__Id_word__3E52440B">
+          <End Role="tblWord_type" Type="Self.tblWord_type" Multiplicity="0..1" />
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblWord_type">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblWord">
+              <PropertyRef Name="Id_wordtype" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DictionaryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblHistory_add" EntityType="Self.tblHistory_add" />
+          <EntitySet Name="tblHistory_search" EntityType="Self.tblHistory_search" />
+          <EntitySet Name="tblLanguages" EntityType="Self.tblLanguage" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="tblWords" EntityType="Self.tblWord" />
+          <EntitySet Name="tblWord_type" EntityType="Self.tblWord_type" />
+          <AssociationSet Name="FK__tblHistor__Id_wo__46E78A0C" Association="Self.FK__tblHistor__Id_wo__46E78A0C">
+            <End Role="tblWord" EntitySet="tblWords" />
+            <End Role="tblHistory_add" EntitySet="tblHistory_add" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblHistor__Id_wo__4316F928" Association="Self.FK__tblHistor__Id_wo__4316F928">
+            <End Role="tblWord" EntitySet="tblWords" />
+            <End Role="tblHistory_search" EntitySet="tblHistory_search" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblWord__Id_Lang__3D5E1FD2" Association="Self.FK__tblWord__Id_Lang__3D5E1FD2">
+            <End Role="tblLanguage" EntitySet="tblLanguages" />
+            <End Role="tblWord" EntitySet="tblWords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblWord__Id_word__3E52440B" Association="Self.FK__tblWord__Id_word__3E52440B">
+            <End Role="tblWord_type" EntitySet="tblWord_type" />
+            <End Role="tblWord" EntitySet="tblWords" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DictionaryModelStoreContainer" CdmEntityContainer="DictionaryEntities">
+          <EntitySetMapping Name="tblHistory_add">
+            <EntityTypeMapping TypeName="DictionaryModel.tblHistory_add">
+              <MappingFragment StoreEntitySet="tblHistory_add">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_word" ColumnName="Id_word" />
+                <ScalarProperty Name="dDatetime" ColumnName="dDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHistory_search">
+            <EntityTypeMapping TypeName="DictionaryModel.tblHistory_search">
+              <MappingFragment StoreEntitySet="tblHistory_search">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="Id_word" ColumnName="Id_word" />
+                <ScalarProperty Name="dDatetime" ColumnName="dDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblLanguages">
+            <EntityTypeMapping TypeName="DictionaryModel.tblLanguage">
+              <MappingFragment StoreEntitySet="tblLanguage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="sLanguage" ColumnName="sLanguage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="DictionaryModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="sEmail" ColumnName="sEmail" />
+                <ScalarProperty Name="sPasswordHash" ColumnName="sPasswordHash" />
+                <ScalarProperty Name="sSalt" ColumnName="sSalt" />
+                <ScalarProperty Name="sRole" ColumnName="sRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWords">
+            <EntityTypeMapping TypeName="DictionaryModel.tblWord">
+              <MappingFragment StoreEntitySet="tblWord">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Language" ColumnName="Id_Language" />
+                <ScalarProperty Name="Id_wordtype" ColumnName="Id_wordtype" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
+                <ScalarProperty Name="sWord" ColumnName="sWord" />
+                <ScalarProperty Name="sExample" ColumnName="sExample" />
+                <ScalarProperty Name="sDefinition" ColumnName="sDefinition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblWord_type">
+            <EntityTypeMapping TypeName="DictionaryModel.tblWord_type">
+              <MappingFragment StoreEntitySet="tblWord_type">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="sWordtype" ColumnName="sWordtype" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

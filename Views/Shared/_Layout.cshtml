@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - HAPNDictionary</title>
+    <link rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a class="logo" href="/">HAPNDictionary</a>
+            <div class="user-links">
+                <a href="/User/Login">Đăng nhập</a>
+                <a href="/User/SignUp">Đăng ký</a>
+            </div>
+        </div>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    
+</body>
+</html>
