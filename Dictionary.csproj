@@ -150,6 +150,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DictionaryModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SearchWords_Result.cs">
+      <DependentUpon>DictionaryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblHistory_add.cs">
       <DependentUpon>DictionaryModel.tt</DependentUpon>
     </Compile>
@@ -188,14 +191,15 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Login.css" />
+    <Content Include="Content\phong_style\p_style.css" />
     <Content Include="Content\SignUp.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\DictionaryModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DictionaryModel.Context.cs</LastGenOutput>
       <DependentUpon>DictionaryModel.edmx</DependentUpon>
+      <LastGenOutput>DictionaryModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\DictionaryModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -208,6 +212,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\phong_style\p_style.scss" />
     <EntityDeploy Include="Models\DictionaryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DictionaryModel.Designer.cs</LastGenOutput>
@@ -245,6 +250,8 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Admin\SignUp.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Home\Search_result.cshtml" />
+    <Content Include="Views\Home\Search_result_detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

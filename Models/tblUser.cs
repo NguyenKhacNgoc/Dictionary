@@ -14,10 +14,25 @@ namespace Dictionary.Models
     
     public partial class tblUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblUser()
+        {
+            this.tblHistory_add = new HashSet<tblHistory_add>();
+            this.tblHistory_search = new HashSet<tblHistory_search>();
+            this.tblWords = new HashSet<tblWord>();
+        }
+    
         public int Id { get; set; }
         public string sEmail { get; set; }
         public string sPasswordHash { get; set; }
         public string sSalt { get; set; }
         public string sRole { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblHistory_add> tblHistory_add { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblHistory_search> tblHistory_search { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblWord> tblWords { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Dictionary.Models
         public tblLanguage()
         {
             this.tblWords = new HashSet<tblWord>();
+            this.tblWords1 = new HashSet<tblWord>();
         }
     
         public int Id { get; set; }
@@ -25,5 +26,7 @@ namespace Dictionary.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblWord> tblWords { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblWord> tblWords1 { get; set; }
     }
 }

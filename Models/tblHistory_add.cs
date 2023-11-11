@@ -19,6 +19,7 @@ namespace Dictionary.Models
         public Nullable<int> Id_word { get; set; }
         public Nullable<System.DateTime> dDatetime { get; set; }
     
+        public virtual tblUser tblUser { get; set; }
         public virtual tblWord tblWord { get; set; }
     }
 }

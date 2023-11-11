@@ -23,6 +23,7 @@ namespace Dictionary.Models
     
         public int Id { get; set; }
         public Nullable<int> Id_Language { get; set; }
+        public Nullable<int> Id_Language_trans { get; set; }
         public Nullable<int> Id_wordtype { get; set; }
         public Nullable<int> Id_user { get; set; }
         public string sWord { get; set; }
@@ -34,6 +35,8 @@ namespace Dictionary.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblHistory_search> tblHistory_search { get; set; }
         public virtual tblLanguage tblLanguage { get; set; }
+        public virtual tblLanguage tblLanguage1 { get; set; }
+        public virtual tblUser tblUser { get; set; }
         public virtual tblWord_type tblWord_type { get; set; }
     }
 }

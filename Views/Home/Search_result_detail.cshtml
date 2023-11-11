@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Dictionary.Models.SearchWords_Result>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <a href="javascript:void(0)" class="word_item p_flex_start">
+        <span class="word_text">@Html.DisplayFor(modelItem => item.sWord)</span>
+        <span class="word_attr p_flex_start">
+            <span class="word_type"> @Html.DisplayNameFor(model => model.sWordtype)  : @Html.DisplayFor(modelItem => item.sWordtype)</span>
+            <span class="word_type"> @Html.DisplayNameFor(model => model.sExample)  : @Html.DisplayFor(modelItem => item.sExample)</span>
+            <span class="word_type"> @Html.DisplayNameFor(model => model.sDefinition)  : @Html.DisplayFor(modelItem => item.sDefinition)</span>
+        </span>
+    </a>
+}
+
+
