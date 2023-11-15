@@ -1,5 +1,6 @@
 ﻿using Dictionary.DTO;
 using Dictionary.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Dictionary.Controllers
 {
     public class UserController : Controller
     {
+        
         // GET: User
         public ActionResult Index()
         {
@@ -57,6 +59,7 @@ namespace Dictionary.Controllers
             
 
         }
+        
         // Hàm tạo salt ngẫu nhiên
         private byte[] GenerateSalt()
         {
@@ -86,11 +89,18 @@ namespace Dictionary.Controllers
         {
             DictionaryEntities db = new DictionaryEntities();
             var existingUser = db.tblUsers.FirstOrDefault(x => x.sEmail == model.sEmail);
-            if (existingUser != null && VerifyPassword(model.sPassword, existingUser.sPasswordHash, existingUser.sSalt) && existingUser.sRole.Equals("User"))
+            if (existingUser != null && VerifyPassword(model.sPassword, existingUser.sPasswordHash, existingUser.sSalt))
             {
                 TempData["response"] = "Đăng nhập thành công";
-                //Lưu người dùng vào session
-                Session["LoggedUser"] = existingUser.Id;
+                //Lưu người dùng vào cookies
+                UserResponseDTO userResponse = new UserResponseDTO();
+                userResponse.sEmail = existingUser.sEmail;
+                userResponse.sRole = existingUser.sRole;
+                HttpCookie cookie = new HttpCookie("LoggedUser");
+                cookie.Value = JsonConvert.SerializeObject(userResponse);
+                //Cookie có thời hạn 7 ngày sau khi đăng nhập
+                cookie.Expires = DateTime.Now.AddDays(7);
+                Response.Cookies.Add(cookie);
                 return RedirectToAction("Index", "Home");
                 
 
@@ -125,7 +135,6 @@ namespace Dictionary.Controllers
                 return hashBytes.SequenceEqual(storedHash);
             }
         }
-
-
+        
     }
 }

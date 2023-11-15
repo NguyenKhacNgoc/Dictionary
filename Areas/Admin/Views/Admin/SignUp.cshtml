@@ -1,7 +1,7 @@
 ﻿@model Dictionary.DTO.UserDTO
 <link rel="stylesheet" href="~/Content/SignUp.css" />
 <h2 style="text-align:center">Register Account</h2>
-<form method="post" class="signup-form" action="/Admin/SignUp" onsubmit="return validateForm()">
+<form method="post" class="signup-form" action="/Admin/Admin/SignUp" onsubmit="return validateForm()">
     <input type="email" id="sEmail" name="sEmail" placeholder="Email" required emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/>
     <input type="password" id="sPassword" name="sPassword" placeholder="Password" required>
     <input type="password" id="cfpassword" name="cfpassword" placeholder="Confirm Password" required>
@@ -9,6 +9,12 @@
         @if (!string.IsNullOrEmpty(TempData["Error"] as string))
         {
             @Html.Raw(TempData["Error"])
+        }
+    </span>
+    <span id="success" style="color:forestgreen;">
+        @if (!string.IsNullOrEmpty(TempData["Success"] as string))
+        {
+            @Html.Raw(TempData["Success"])
         }
     </span>
     <br />
@@ -43,5 +49,8 @@
 
     }
 </script>
+
+
+
 
 

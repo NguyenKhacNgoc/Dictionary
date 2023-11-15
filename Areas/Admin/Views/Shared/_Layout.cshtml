@@ -19,19 +19,13 @@
                     var existingUser = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary.Models.tblUser>(userCookie);
 
                     <span>Xin chào, @existingUser.sEmail!</span>
-                    /*Nếu ae có đọc phần này thì t đang hướng đến đó là nếu người dùng đăng nhập tài khoản admin thì nó cũng có thể sử dụng trang web với role là user lẫn admin */
-                    if (existingUser.sRole == "Admin")
-                    {
-                        <a href="/Admin/Admin/Index">Chức năng cho đội phát triển</a>
-                    }
+                    <a href="/Admin/Admin/Index">Chức năng cho đội phát triển</a>
                     <button class="btn_logoutUser">Đăng xuất</button>
-
-
                 }
                 else
                 {
                     <a href="/User/Login">Đăng nhập</a>
-                    <a href="/User/SignUp">Đăng ký</a>
+                    <a href="/Admin/Amin/SignUp">Đăng ký</a>
                 }
             </div>
         </div>
@@ -60,12 +54,7 @@
         if (btnLogout) {
             btnLogout.addEventListener('click', function () {
 
-                document.cookie = "LoggedUser=; expires=Thu, 01 Jan 1970 00
-                     * 
-                     * 
-                     * 
-                     * 
-                     * :00:00 UTC; path=/;";
+                document.cookie = "LoggedUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 location.reload()
             })
         }

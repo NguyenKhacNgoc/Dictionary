@@ -12,21 +12,15 @@ namespace Dictionary.Controllers
         DictionaryEntities dictionaryEntities = new DictionaryEntities();
         public ActionResult Index()
         {
-            if (Session["LoggedUser"] != null)
-            {
-                var list_Language = dictionaryEntities.tblLanguages.ToList();
-                return View(list_Language);
 
-            }
-            else
-            {
-                return RedirectToAction("Login", "User");
-            }
-            
+            var list_Language = dictionaryEntities.tblLanguages.ToList();
+            return View(list_Language);
+
         }
 
         public ActionResult Search_result(string text, string lang, string lang_tran)
         {
+
             using (var context = new DictionaryEntities())
             {
                 var result = context.SearchWords(text, lang, lang_tran)
@@ -41,10 +35,15 @@ namespace Dictionary.Controllers
 
                 return View(result);
             }
+
+
+
+
         }
 
         public ActionResult Search_result_detail(string text, string lang, string lang_tran)
         {
+
             using (var context = new DictionaryEntities())
             {
                 var result = context.SearchWords(text, lang, lang_tran)
@@ -59,6 +58,7 @@ namespace Dictionary.Controllers
 
                 return View(result);
             }
+
         }
 
     }
