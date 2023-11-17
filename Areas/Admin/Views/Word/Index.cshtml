@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Dictionary.Models.tblWord>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Word List</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </p>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Từ</th>
+                <th>Ví dụ</th>
+                <th>Mô tả </th>
+                <th>Ngôn ngữ</th>
+                <th>Loại từ</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.sWord)</td>
+                    <td>@Html.DisplayFor(modelItem => item.sExample)</td>
+                    <td>@Html.DisplayFor(modelItem => item.sDefinition)</td>
+                    <td>@Html.DisplayFor(modelItem => item.tblLanguage.sLanguage)</td>
+                    <td>@Html.DisplayFor(modelItem => item.tblWord_type.sWordtype)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-sm" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

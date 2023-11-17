@@ -1,4 +1,6 @@
-﻿-- Tạo bảng tblUser với cột id tự động tăng
+﻿CREATE DATABASE Dictionary
+USE Dictionary
+-- Tạo bảng tblUser với cột id tự động tăng
 CREATE TABLE tblUser (
     Id INT IDENTITY PRIMARY KEY,
     sEmail VARCHAR(255) NOT NULL,
@@ -89,3 +91,7 @@ VALUES
 (1, 2, 2, 1, N'Computer', N'I use a computer for work', N'An electronic device for storing and processing data'),
 (2, 1, 1, 1, N'Học', N'Tôi đang học tiếng Anh', N'Hành động học hoặc nắm vững kiến thức'),
 (1, 2, 3, 1, N'Happy', N'I am very happy today', N'Feeling or showing pleasure or contentment');
+
+SELECT * FROM tblWord
+SELECT * FROM tblLanguage
+SELECT * FROM tblWord_type

@@ -7,24 +7,25 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Dictionary.Controllers
+namespace Dictionary.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class HomeAdminController : Controller
     {
-        // GET: Admin
+        // GET: Admin/Home
+      
         public ActionResult Index()
-        {
+        { 
             return View();
         }
+
         public ActionResult SignUp()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult SignUp(UserDTO model)
         {
-
-
             DictionaryEntities db = new DictionaryEntities();
             var existingUser = db.tblUsers.FirstOrDefault(x => x.sEmail == model.sEmail);
             if (existingUser != null)
@@ -90,7 +91,7 @@ namespace Dictionary.Controllers
                 TempData["response"] = "Đăng nhập thành công";
                 //Lưu người dùng vào session
                 Session["LoggedAdmin"] = existingUser.Id;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "HomeAdmin");
 
 
             }
@@ -125,4 +126,5 @@ namespace Dictionary.Controllers
             }
         }
     }
+
 }
