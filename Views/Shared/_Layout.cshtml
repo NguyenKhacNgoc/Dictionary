@@ -36,6 +36,7 @@
             </div>
         </div>
     </header>
+    <div class="black_cover"></div>
     <div class="container body-content">
         @RenderBody()
     </div>
@@ -60,16 +61,12 @@
         if (btnLogout) {
             btnLogout.addEventListener('click', function () {
 
-                document.cookie = "LoggedUser=; expires=Thu, 01 Jan 1970 00
-                     * 
-                     * 
-                     * 
-                     * 
-                     * :00:00 UTC; path=/;";
+                document.cookie = "LoggedUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path = /;";
                 location.reload()
             })
         }
 
     })
 </script>
+<script type="text/javascript" async="" src="~/Scripts/phong/phongJavaScript.js"></script>
 

@@ -10,12 +10,12 @@
     <div class="p_drop_down">
         @foreach (var item in Model)
         {
-            <a href="javascript:void(0)" class="word_item p_flex_start">
+            <a href="javascript:void(0)" class="word_item p_flex_start" data-id-word="@Html.DisplayFor(modelItem => item.Id)">
                 <span class="word_text">@Html.DisplayFor(modelItem => item.sWord)</span>
                 <span class="word_attr p_flex_start">
-                    <span class="word_type"> @Html.DisplayNameFor(model => model.sWordtype)  : @Html.DisplayFor(modelItem => item.sWordtype)</span>
-                    <span class="word_type"> @Html.DisplayNameFor(model => model.sExample)  : @Html.DisplayFor(modelItem => item.sExample)</span>
-                    <span class="word_type"> @Html.DisplayNameFor(model => model.sDefinition)  : @Html.DisplayFor(modelItem => item.sDefinition)</span>
+                    <span class="word_type"> Loại từ  : @Html.DisplayFor(modelItem => item.sWordtype)</span>
+                    <span class="word_type"> Ví dụ  : @Html.DisplayFor(modelItem => item.sExample)</span>
+                    <span class="word_type"> Mô tả  : @Html.DisplayFor(modelItem => item.sDefinition)</span>
                 </span>
             </a>
         }
@@ -26,8 +26,8 @@ else
     <h3>Không tìm thấy từ bạn vừa nhập</h3>
     <div class="p_drop_down">
 
-            <a href="javascript:void(0)" class="search_in_other p_flex_start">
-                Tìm kiếm trên web khác
+            <a href="javascript:void(0)" data-type="@ViewData["type"]" data-loading-text="@ViewData["text"]" class="search_in_other p_flex_start">
+                Tìm kiếm từ web khác
             </a>
 
     </div>

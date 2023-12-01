@@ -17,5 +17,6 @@ namespace Dictionary.Models
         public string sWordtype { get; set; }
         public string sExample { get; set; }
         public string sDefinition { get; set; }
+        public int Id { get; set; }
     }
 }

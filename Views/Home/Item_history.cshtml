@@ -1,0 +1,13 @@
+﻿
+@{
+    Layout = null;
+}
+@model  List<Dictionary.Models.tblWord>
+
+@foreach (var item in Model)
+{
+    <a href="javascript:void(0)" class="word_item p_flex_start" data-id-word="@Html.DisplayFor(modelItem => item.Id)">
+        <span class="word_text">@Html.DisplayFor(modelItem => item.sWord)</span>
+        <span class="word_type"> Mô tả  : @Html.DisplayFor(modelItem => item.sDefinition)</span>
+    </a>
+}

@@ -55,19 +55,19 @@ CREATE TABLE tblHistory_add (
     FOREIGN KEY (Id_word) REFERENCES tblWord(Id)
 );
 
-CREATE PROCEDURE SearchWords
-    @_word NVARCHAR(255),
-    @_lang NVARCHAR(50),
-    @_lang_trans NVARCHAR(50)
+Alter  PROCEDURE SearchWords
+    @word NVARCHAR(255),
+    @lang NVARCHAR(50),
+    @lang_trans NVARCHAR(50)
 AS
 BEGIN
-    SELECT w.sWord, wt.sWordtype, w.sExample, w.sDefinition
+    SELECT w.sWord, wt.sWordtype, w.sExample, w.sDefinition,w.Id
     FROM tblWord w
     INNER JOIN tblWord_type wt ON w.Id_wordtype = wt.Id
     INNER JOIN tblLanguage lang ON w.Id_Language = lang.Id
     INNER JOIN tblLanguage lang_trans ON w.Id_Language_trans = lang_trans.Id
-    WHERE (LOWER(lang.sLanguage) = LOWER(@_lang) OR (@_lang = @_lang_trans AND LOWER(lang.sLanguage) = LOWER(@_lang_trans)))
-          AND LOWER(w.sWord) LIKE LOWER(@_word) + '%';
+    WHERE (LOWER(lang.sLanguage) = LOWER(@lang) OR (@lang = @lang_trans AND LOWER(lang.sLanguage) = LOWER(@lang_trans)))
+          AND LOWER(w.sWord) LIKE LOWER(@word) + '%';
 END
 
 

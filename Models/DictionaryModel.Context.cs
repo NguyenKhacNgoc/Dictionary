@@ -34,21 +34,21 @@ namespace Dictionary.Models
         public virtual DbSet<tblWord> tblWords { get; set; }
         public virtual DbSet<tblWord_type> tblWord_type { get; set; }
     
-        public virtual ObjectResult<SearchWords_Result> SearchWords(string p_word, string p_lang, string p_lang_trans)
+        public virtual ObjectResult<SearchWords_Result> SearchWords(string word, string lang, string lang_trans)
         {
-            var p_wordParameter = p_word != null ?
-                new ObjectParameter("p_word", p_word) :
-                new ObjectParameter("p_word", typeof(string));
+            var wordParameter = word != null ?
+                new ObjectParameter("word", word) :
+                new ObjectParameter("word", typeof(string));
     
-            var p_langParameter = p_lang != null ?
-                new ObjectParameter("p_lang", p_lang) :
-                new ObjectParameter("p_lang", typeof(string));
+            var langParameter = lang != null ?
+                new ObjectParameter("lang", lang) :
+                new ObjectParameter("lang", typeof(string));
     
-            var p_lang_transParameter = p_lang_trans != null ?
-                new ObjectParameter("p_lang_trans", p_lang_trans) :
-                new ObjectParameter("p_lang_trans", typeof(string));
+            var lang_transParameter = lang_trans != null ?
+                new ObjectParameter("lang_trans", lang_trans) :
+                new ObjectParameter("lang_trans", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchWords_Result>("SearchWords", p_wordParameter, p_langParameter, p_lang_transParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchWords_Result>("SearchWords", wordParameter, langParameter, lang_transParameter);
         }
     }
 }
