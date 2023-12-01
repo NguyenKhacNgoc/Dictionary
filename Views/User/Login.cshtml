@@ -1,8 +1,14 @@
-﻿@model Dictionary.DTO.UserDTO
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Dictionary.DTO.UserDTO
 <link rel="stylesheet" href="~/Content/Login.css" />
 <h2 style="text-align:center">Login Account</h2>
 <form method="post" class="login-form" action="/User/Login" onsubmit="return validateForm()">
-    <input type="email" id="sEmail" name="sEmail" placeholder="Email" required emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/>
+    <input type="email" id="sEmail" name="sEmail" placeholder="Email" required emailPattern= /^[^\s@]+@[^\s@]+\.[^\s@]+$ />
     <input type="password" id="sPassword" name="sPassword" placeholder="Password" required>
     <span id="error" style="color:red;">
         @if (!string.IsNullOrEmpty(TempData["response"] as string))
@@ -34,4 +40,6 @@
 
     }
 </script>
+
+
 

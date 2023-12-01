@@ -57,10 +57,10 @@ CREATE TABLE tblHistory_add (
     FOREIGN KEY (Id_word) REFERENCES tblWord(Id)
 );
 
-CREATE PROCEDURE SearchWords
-    @_word NVARCHAR(255),
-    @_lang NVARCHAR(50),
-    @_lang_trans NVARCHAR(50)
+ALTER PROCEDURE SearchWords
+    @word NVARCHAR(255),
+    @lang NVARCHAR(50),
+    @lang_trans NVARCHAR(50)
 AS
 BEGIN
     SELECT w.sWord, wt.sWordtype, w.sExample, w.sDefinition
@@ -68,8 +68,8 @@ BEGIN
     INNER JOIN tblWord_type wt ON w.Id_wordtype = wt.Id
     INNER JOIN tblLanguage lang ON w.Id_Language = lang.Id
     INNER JOIN tblLanguage lang_trans ON w.Id_Language_trans = lang_trans.Id
-    WHERE (LOWER(lang.sLanguage) = LOWER(@_lang) OR (@_lang = @_lang_trans AND LOWER(lang.sLanguage) = LOWER(@_lang_trans)))
-          AND LOWER(w.sWord) LIKE LOWER(@_word) + '%';
+    WHERE (LOWER(lang.sLanguage) = LOWER(@lang) OR (@lang = @lang_trans AND LOWER(lang.sLanguage) = LOWER(@lang_trans)))
+          AND LOWER(w.sWord) LIKE LOWER(@word) + '%';
 END
 
 
@@ -89,7 +89,7 @@ VALUES
 (1, 2, 1, 1, N'Run', N'He runs every morning', N'To move swiftly on foot'),
 (2, 1, 3, 1, N'Đẹp', N'Cô ấy rất đẹp', N'Gợi cảm, hấp dẫn'),
 (1, 2, 2, 1, N'Computer', N'I use a computer for work', N'An electronic device for storing and processing data'),
-(2, 1, 1, 1, N'Học', N'Tôi đang học tiếng Anh', N'Hành động học hoặc nắm vững kiến thức'),
+(1, 1, 1, 1, N'Học', N'Tôi đang học tiếng Anh', N'Hành động học hoặc nắm vững kiến thức'),
 (1, 2, 3, 1, N'Happy', N'I am very happy today', N'Feeling or showing pleasure or contentment');
 
 SELECT * FROM tblWord

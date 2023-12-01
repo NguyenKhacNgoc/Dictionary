@@ -1,8 +1,14 @@
-﻿@model Dictionary.DTO.UserDTO
+﻿
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Dictionary.DTO.UserDTO
 <link rel="stylesheet" href="~/Content/SignUp.css" />
 <h2 style="text-align:center">Register Account</h2>
 <form method="post" class="signup-form" action="/User/SignUp" onsubmit="return validateForm()">
-    <input type="email" id="sEmail" name="sEmail" placeholder="Email" required emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/>
+    <input type="email" id="sEmail" name="sEmail" placeholder="Email" required emailPattern= /^[^\s@]+@[^\s@]+\.[^\s@]+$ />
     <input type="password" id="sPassword" name="sPassword" placeholder="Password" required>
     <input type="password" id="cfpassword" name="cfpassword" placeholder="Confirm Password" required>
     <span id="error" style="color:red;">
@@ -43,4 +49,6 @@
 
     }
 </script>
+
+
 

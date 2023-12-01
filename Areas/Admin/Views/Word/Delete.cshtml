@@ -6,48 +6,56 @@
 }
 
 <div class="container">
-    <h2>Delete Word</h2>
+    <h2>Xóa từ</h2>
 
     <div class="alert alert-danger">
-        <strong>Warning!</strong> Are you sure you want to delete this word?
+        <strong>Warning!</strong> Bạn có chắc chắn muốn xóa từ ? 
     </div>
 
     <div class="well">
-        <h4>Word Details</h4>
+        <h4>Chi tiết từ</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-               Từ 
+                Ngôn ngữ
             </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tblLanguage.sLanguage)
+            </dd>
+
+            <dt>
+                Loại từ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tblWord_type.sWordtype)
+            </dd>
+
+            <dt>
+                Từ
+            </dt>
+
             <dd>
                 @Html.DisplayFor(model => model.sWord)
             </dd>
 
             <dt>
-               Ví dụ 
+                Ví dụ
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.sExample)
             </dd>
-
             <dt>
-                Mô tả 
+                Ngôn ngữ dịch
             </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tblLanguage1.sLanguage)
+            </dd>
+            <dt>
+                Mô tả cho ngôn ngữ dịch
+            </dt>
+
             <dd>
                 @Html.DisplayFor(model => model.sDefinition)
-            </dd>
-
-            <dt>
-                Ngôn ngữ 
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.tblLanguage.sLanguage)
-            </dd>
-            <dt>
-              Loại từ 
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.tblWord_type.sWordtype)
             </dd>
         </dl>
     </div>
@@ -55,11 +63,10 @@
     @using (Html.BeginForm("Delete", "Word", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Delete" class="btn btn-danger" />
-                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     }

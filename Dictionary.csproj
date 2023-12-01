@@ -130,8 +130,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\History_addController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\tblUsersController.cs" />
     <Compile Include="Areas\Admin\Controllers\WordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -235,11 +235,11 @@
     <Content Include="Areas\Admin\Views\Word\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Word\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Word\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\History_add\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\History_add\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\History_add\Details.cshtml" />
-    <Content Include="Areas\Admin\Views\History_add\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\History_add\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\tblUsers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\tblUsers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\tblUsers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\tblUsers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\tblUsers\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -266,10 +266,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\User\SignUp.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Home\Search_result.cshtml" />
     <Content Include="Views\Home\Search_result_detail.cshtml" />
+    <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

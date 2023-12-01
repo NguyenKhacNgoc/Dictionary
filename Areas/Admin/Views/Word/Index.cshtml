@@ -6,39 +6,47 @@
 }
 
 <div class="container">
-    <h2>Word List</h2>
+    <h2>Danh sách từ</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Thêm từ mới", "Create", null, new { @class = "btn btn-primary" })
     </p>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Từ</th>
-                <th>Ví dụ</th>
-                <th>Mô tả </th>
-                <th>Ngôn ngữ</th>
-                <th>Loại từ</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-container">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.sWord)</td>
-                    <td>@Html.DisplayFor(modelItem => item.sExample)</td>
-                    <td>@Html.DisplayFor(modelItem => item.sDefinition)</td>
-                    <td>@Html.DisplayFor(modelItem => item.tblLanguage.sLanguage)</td>
-                    <td>@Html.DisplayFor(modelItem => item.tblWord_type.sWordtype)</td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-sm" }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
-                    </td>
+                    <th>Từ</th>
+                    <th>Loại từ</th>
+                    <th>Ngôn ngữ</th>
+                    <th>Ví dụ</th>
+                    <th>Ngôn ngữ dịch</th>
+                    <th>Mô tả </th>
+        
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.sWord)</td>
+                        <td>@Html.DisplayFor(modelItem => item.tblWord_type.sWordtype)</td>
+                        <td>@Html.DisplayFor(modelItem => item.tblLanguage.sLanguage)</td>
+                        <td>
+                            <div style="max-height: 100px; overflow: hidden;">
+                                @Html.DisplayFor(modelItem => item.sExample)
+                            </div>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.tblLanguage1.sLanguage)</td>
+                        <td>@Html.DisplayFor(modelItem => item.sDefinition)</td>
+                        <td>
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
+                            @*@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-sm" }) |*@
+                            @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

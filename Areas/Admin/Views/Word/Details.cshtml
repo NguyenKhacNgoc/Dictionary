@@ -6,47 +6,54 @@
 }
 
 <div class="container">
-    <h2>Details for Word</h2>
+    <h2>Chi tiết từ</h2>
 
     <div class="well">
-        <h4>Word Details</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-               Từ 
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.sWord)
-            </dd>
-
-            <dt>
-               Ví dụ 
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.sExample)
-            </dd>
-
-            <dt>
-               Mô tả 
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.sDefinition)
-            </dd>
-
-            <dt>
-               Ngôn ngữ 
+                Ngôn ngữ
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.tblLanguage.sLanguage)
             </dd>
 
             <dt>
-                Loại từ 
+                Loại từ
             </dt>
             <dd>
                 @Html.DisplayFor(model => model.tblWord_type.sWordtype)
             </dd>
+
+            <dt>
+                Từ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sWord)
+            </dd>
+
+            <dt>
+                Ví dụ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.sExample)
+            </dd>
+            <dt>
+                Ngôn ngữ dịch 
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tblLanguage1.sLanguage)
+            </dd>
+            <dt>
+                Mô tả cho ngôn ngữ dịch
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sDefinition)
+            </dd>
+
+
         </dl>
     </div>
 

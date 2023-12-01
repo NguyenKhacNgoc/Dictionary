@@ -15,6 +15,7 @@ namespace Dictionary.Controllers
         // GET: User
         public ActionResult Index()
         {
+
             return View();
         }
         public ActionResult SignUp()

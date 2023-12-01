@@ -1,0 +1,57 @@
+﻿@model Dictionary.Models.tblUser
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Xóa User</h2>
+
+    <div class="alert alert-danger">
+        <strong>Warning!</strong> Bạn có chắc chắn muốn xóa?
+    </div>
+    <div>
+        <h4>Thông tin User </h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+               Email
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.sEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.sPasswordHash)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.sPasswordHash)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.sSalt)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.sSalt)
+            </dd>
+
+            <dt>
+               Quyền
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.sRole)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <button type="submit" class="btn btn-danger">Delete</button> |
+                @Html.ActionLink("Trở lại danh sách", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        }
+    </div>
+</div>
