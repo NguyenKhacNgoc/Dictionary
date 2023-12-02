@@ -7,7 +7,7 @@
 @model Dictionary.DTO.UserDTO
 <link rel="stylesheet" href="~/Content/Login.css" />
 <h2 style="text-align:center">Login Account</h2>
-<form method="post" class="login-form" action="/Admin/HomeAdmin/Index" onsubmit="return validateForm()">
+<form method="post" class="login-form" action="/Admin/HomeAdmin/LoginAdmin" onsubmit="return validateForm()">
     <input type="email" id="sEmail" name="sEmail" placeholder="Email" required emailPattern= /^[^\s@]+@[^\s@]+\.[^\s@]+$ />
     <input type="password" id="sPassword" name="sPassword" placeholder="Password" required>
     <span id="error" style="color:red;">

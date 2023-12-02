@@ -226,8 +226,6 @@
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
-    <Content Include="Areas\Admin\Views\HomeAdmin\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\HomeAdmin\SignUp.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Word\Create.cshtml" />
@@ -240,6 +238,8 @@
     <Content Include="Areas\Admin\Views\tblUsers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\SignUpAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\LoginAdmin.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

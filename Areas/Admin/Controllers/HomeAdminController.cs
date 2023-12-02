@@ -18,13 +18,13 @@ namespace Dictionary.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult SignUp()
+        public ActionResult SignUpAdmin()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult SignUp(UserDTO model)
+        public ActionResult SignUpAdmin(UserDTO model)
         {
             DictionaryEntities db = new DictionaryEntities();
             var existingUser = db.tblUsers.FirstOrDefault(x => x.sEmail == model.sEmail);
@@ -51,7 +51,7 @@ namespace Dictionary.Areas.Admin.Controllers
                 };
                 db.tblUsers.Add(admin);
                 db.SaveChanges();
-                return RedirectToAction("Login");
+                return RedirectToAction("LoginAdmin");
 
             }
 
@@ -77,41 +77,46 @@ namespace Dictionary.Areas.Admin.Controllers
                 return sha256.ComputeHash(saltedPassword);
             }
         }
-        public ActionResult Login()
+        public ActionResult LoginAdmin()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult Login(UserDTO model)
+        public ActionResult LoginAdmin(UserDTO model)
         {
             DictionaryEntities db = new DictionaryEntities();
             var existingUser = db.tblUsers.FirstOrDefault(x => x.sEmail == model.sEmail);
-            if (existingUser != null && VerifyPassword(model.sPassword, existingUser.sPasswordHash, existingUser.sSalt) && existingUser.sRole.Equals("Admin"))
+
+            if (existingUser != null)
             {
-                TempData["response"] = "Đăng nhập thành công";
-                //Lưu người dùng vào session
-                Session["LoggedAdmin"] = existingUser.Id;
-                return RedirectToAction("Index", "HomeAdmin");
-
-
-            }
-            else if (existingUser != null && !VerifyPassword(model.sPassword, existingUser.sPasswordHash, existingUser.sSalt) && existingUser.sRole.Equals("Admin"))
-            {
-                TempData["response"] = "Sai mật khẩu";
-                return View(model);
-
-
+                if (VerifyPassword(model.sPassword, existingUser.sPasswordHash, existingUser.sSalt))
+                {
+                    if (existingUser.sRole.Equals("Admin"))
+                    {
+                        TempData["response"] = "Đăng nhập thành công";
+                        //Lưu người dùng vào session
+                        Session["LoggedAdmin"] = existingUser.Id;
+                        return RedirectToAction("Index", "HomeAdmin");
+                    }
+                    else
+                    {
+                        TempData["response"] = "Tài khoản "+ model.sEmail + " không có quyền truy cập vào trang Admin";
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    TempData["response"] = "Sai mật khẩu";
+                    return View(model);
+                }
             }
             else
             {
                 TempData["response"] = "Tài khoản không tồn tại";
                 return View(model);
-
             }
-
-
-
         }
+
         // Hàm kiểm tra xác thực mật khẩu
         private bool VerifyPassword(string enteredPassword, string passwordHash, string salt)
         {
