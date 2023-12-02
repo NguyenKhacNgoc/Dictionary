@@ -157,6 +157,12 @@
     <Compile Include="Models\SearchWords_Result.cs">
       <DependentUpon>DictionaryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>DictionaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>DictionaryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tblHistory_add.cs">
       <DependentUpon>DictionaryModel.tt</DependentUpon>
     </Compile>
@@ -178,6 +184,78 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\BouncyCastle.Cryptography.dll" />
+    <Content Include="bin\BouncyCastle.Cryptography.xml" />
+    <Content Include="bin\Dictionary.dll" />
+    <Content Include="bin\Dictionary.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Enums.NET.dll" />
+    <Content Include="bin\Enums.NET.pdb" />
+    <Content Include="bin\Enums.NET.xml" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.pdb" />
+    <Content Include="bin\ICSharpCode.SharpZipLib.xml" />
+    <Content Include="bin\MathNet.Numerics.dll" />
+    <Content Include="bin\MathNet.Numerics.xml" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.IO.RecyclableMemoryStream.dll" />
+    <Content Include="bin\Microsoft.IO.RecyclableMemoryStream.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\NPOI.Core.dll" />
+    <Content Include="bin\NPOI.Core.pdb" />
+    <Content Include="bin\NPOI.Core.xml" />
+    <Content Include="bin\NPOI.OOXML.dll" />
+    <Content Include="bin\NPOI.OOXML.pdb" />
+    <Content Include="bin\NPOI.OOXML.xml" />
+    <Content Include="bin\NPOI.OpenXml4Net.dll" />
+    <Content Include="bin\NPOI.OpenXml4Net.pdb" />
+    <Content Include="bin\NPOI.OpenXml4Net.xml" />
+    <Content Include="bin\NPOI.OpenXmlFormats.dll" />
+    <Content Include="bin\NPOI.OpenXmlFormats.pdb" />
+    <Content Include="bin\NPOI.OpenXmlFormats.xml" />
+    <Content Include="bin\SixLabors.Fonts.dll" />
+    <Content Include="bin\SixLabors.Fonts.xml" />
+    <Content Include="bin\SixLabors.ImageSharp.dll" />
+    <Content Include="bin\SixLabors.ImageSharp.xml" />
+    <Content Include="bin\System.Buffers.dll" />
+    <Content Include="bin\System.Buffers.xml" />
+    <Content Include="bin\System.Memory.dll" />
+    <Content Include="bin\System.Memory.xml" />
+    <Content Include="bin\System.Numerics.Vectors.dll" />
+    <Content Include="bin\System.Numerics.Vectors.xml" />
+    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="bin\System.Security.AccessControl.dll" />
+    <Content Include="bin\System.Security.AccessControl.xml" />
+    <Content Include="bin\System.Security.Cryptography.Xml.dll" />
+    <Content Include="bin\System.Security.Cryptography.Xml.xml" />
+    <Content Include="bin\System.Security.Principal.Windows.dll" />
+    <Content Include="bin\System.Security.Principal.Windows.xml" />
+    <Content Include="bin\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\System.Text.Encoding.CodePages.xml" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -224,6 +302,7 @@
     <Content Include="Models\DictionaryModel.edmx.diagram">
       <DependentUpon>DictionaryModel.edmx</DependentUpon>
     </Content>
+<<<<<<< Updated upstream
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -233,13 +312,28 @@
     <Content Include="Areas\Admin\Views\Word\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Word\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Word\Details.cshtml" />
+=======
+    <Content Include="bin\Dictionary.dll.config" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+>>>>>>> Stashed changes
     <Content Include="Areas\Admin\Views\tblUsers\Create.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Index.cshtml" />
+<<<<<<< Updated upstream
     <Content Include="Areas\Admin\Views\HomeAdmin\SignUpAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\LoginAdmin.cshtml" />
+=======
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Word\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\Index.cshtml" />
+>>>>>>> Stashed changes
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -251,6 +345,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\phong\phongJavaScript.js" />
     <Content Include="SQL Server\sql.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

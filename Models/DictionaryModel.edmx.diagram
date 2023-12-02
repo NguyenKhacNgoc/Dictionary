@@ -4,7 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+<<<<<<< Updated upstream
       <Diagram DiagramId="901dba6d07844d1294c2f27e4fafbf25" Name="Diagram1">
+=======
+      <Diagram DiagramId="d42848a65eef419f9fec6c7474ba30a9" Name="Diagram1">
+>>>>>>> Stashed changes
         <EntityTypeShape EntityType="DictionaryModel.tblHistory_add" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="DictionaryModel.tblHistory_search" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="DictionaryModel.tblLanguage" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />

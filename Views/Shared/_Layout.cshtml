@@ -12,8 +12,31 @@
         <div class="header-container">
             <a class="logo" href="/">HAPNDictionary</a>
             <div class="user-links">
+<<<<<<< Updated upstream
                 <a href="/User/Login">Đăng nhập</a>
                 <a href="/User/SignUp">Đăng ký</a>
+=======
+                @if (Request.Cookies["LoggedUser"] != null)
+                {
+                    var userCookie = Request.Cookies["LoggedUser"].Value;
+                    var existingUser = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary.Models.tblUser>(userCookie);
+
+                    <span>Xin chào, @existingUser.sEmail!</span>
+                    /*Nếu ae có đọc phần này thì t đang hướng đến đó là nếu người dùng đăng nhập tài khoản admin thì nó cũng có thể sử dụng trang web với role là user lẫn admin */
+                    if (existingUser.sRole == "Admin")
+                    {
+                        <a href="/Admin/HomeAdmin/Index">Chức năng cho đội phát triển</a>
+                    }
+                    <button class="btn_logoutUser">Đăng xuất</button>
+
+
+                }
+                else
+                {
+                    <a href="/User/Login">Đăng nhập</a>
+                    <a href="/User/SignUp">Đăng ký</a>
+                }
+>>>>>>> Stashed changes
             </div>
         </div>
     </header>
