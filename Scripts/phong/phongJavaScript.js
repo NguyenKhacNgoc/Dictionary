@@ -1,13 +1,36 @@
 ﻿
 
 var id_text_search = [];
+var user_info = [];
 var json_cookie = getCookie('search_his');
 if (json_cookie != null && json_cookie.trim() !== "") {
     var json_cookie_ar = JSON.parse(json_cookie);
     id_text_search = json_cookie_ar;
 }
 
-search_word_history();
+var json_user = getCookie('LoggedUser');
+var id_user = null;
+if (json_user != null && json_user.trim() !== "") {
+    var json_cookie_ar = JSON.parse(json_user);
+    user_info = json_cookie_ar;
+    id_user = user_info.id;
+   
+} else {
+    search_word_history_cookie();
+}
+
+document.getElementById('p_searched').addEventListener('click', function (e) {
+    var p_searchedWrap = document.querySelector('.search_history_wrap');
+    p_searchedWrap.classList.add('p_active');
+    black_cover();
+    
+
+    if (id_user == null) {
+        search_word_history_cookie();
+    } else {
+        get_search_word_history();
+    }
+});
 
 document.getElementById('search-input').addEventListener('input', function (e) {
     search_word();
@@ -20,19 +43,23 @@ document.addEventListener('click', function (event) {
     var searchInput = document.getElementById('search-input');
     var wordItem = event.target.closest('.word_item');
     var search_in_other = document.querySelector('.search_in_other');
-    var p_close = document.querySelector('.p_close');
-    var p_popup = p_close.closest('.p_popup');
+    var p_close = document.querySelector('.p_popup.p_active .p_close');
     var black_cover_click = document.querySelector('.black_cover');
-    var p_popup_active = p_close.closest('.p_popup.p_active');
+    var p_popup_active = document.querySelector('.p_popup.p_active');
 
-    if (wordItem !== null && wordItem.contains(event.target)) {
-        if (listSearch.classList.contains('p_active')) {
-            listSearch.classList.remove('p_active');
+    if (wordItem !== null && wordItem.contains(event.target) && !wordItem.classList.contains('p_result')) {
+        var remove_his = wordItem.querySelector('.p_remove');
+        if (event.target == remove_his) {
+            remove_from_histoer_search(wordItem.getAttribute("data-id-word"));
+        } else {
+            if (listSearch.classList.contains('p_active')) {
+                listSearch.classList.remove('p_active');
+            }
+            search_word_detail(wordItem.getAttribute("data-id-word"));
         }
 
-        search_word_detail(wordItem, wordItem.getAttribute("data-id-word"));
-
-        search_word_history();
+        
+       
     }
 
 
@@ -49,8 +76,8 @@ document.addEventListener('click', function (event) {
     }
 
     if (event.target == p_close ) {
-        if (p_popup.classList.contains('p_active')) {
-            p_popup.classList.remove('p_active');
+        if (p_popup_active.classList.contains('p_active')) {
+            p_popup_active.classList.remove('p_active');
             black_cover();
         }
     }
@@ -83,6 +110,48 @@ document.addEventListener('click', function (event) {
 document.querySelector('.p_select_lang, .p_select_lang_trans').addEventListener('change', function () {
     search_word()
 });
+
+function remove_from_histoer_search(id) {
+    var search_history_wrap = document.querySelector('.search_history_wrap ');
+    if (id_user == null) {
+        for (let i = 0; i < id_text_search.length; i++) {
+            if (id_text_search[i].id === id) {
+                id_text_search.splice(i, 1);
+            }
+        }
+        console.log(id_text_search);
+        var t = JSON.stringify(id_text_search);
+
+        document.cookie = 'search_his=' + t + ';expires=' + new Date + '';
+        search_word_history_cookie();
+    } else {
+        var xhr = new XMLHttpRequest();
+        var url = '/Home/Remove_from_history_search';
+
+        xhr.open('GET', url + '?id_user=' + encodeURIComponent(id_user) + '&id_word=' + encodeURIComponent(id), true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.responseText);
+                get_search_word_history();
+            }
+        };
+
+        xhr.send();
+        
+    }
+
+    setTimeout(function () {
+        var search_history_wrap = document.querySelector('.search_history_wrap ');
+        var search_history_div = search_history_wrap.querySelector('.search_history');
+        var item = search_history_div.querySelector('.word_item ');
+        if (item == null && search_history_wrap.classList.contains('p_active')) {
+            black_cover();
+            search_history_wrap.classList.remove('p_active')
+        }
+    }, 400);
+
+}
 
 function black_cover() {
     var black_cover = document.querySelector('.black_cover');
@@ -119,7 +188,7 @@ function search_word() {
 
         if (pDropDownElement !== null) {
             // Tạo chuỗi HTML mới cho phần tử <a>
-            var newAnchorHTML = '<a href="javascript:void(0)" class="p_empty  p_flex_start">Bạn đan bỏ trống</a>';
+            var newAnchorHTML = '<a href="javascript:void(0)" class="p_empty  p_flex_start">Bạn đang bỏ trống</a>';
 
             // Thay thế nội dung HTML của phần tử .p_drop_down
             pDropDownElement.innerHTML = newAnchorHTML;
@@ -132,10 +201,7 @@ function search_word() {
 }
 
 
-function search_word_detail(target,id_search) {
-    var searchInputValue = target.querySelector('.word_text').textContent;
-    var selectedLang = document.querySelector('.p_select_lang option:checked').value;
-    var selectedLangTrans = document.querySelector('.p_select_lang_trans option:checked').value;
+function search_word_detail(id_search) {
     var result = document.getElementById('result');
     
     var d = new Date,
@@ -151,21 +217,48 @@ function search_word_detail(target,id_search) {
         date_time: dformat
     };
 
-    id_text_search.push(search_his);
+    let isIdExist = false;
 
+
+    for (let i = 0; i < id_text_search.length; i++) {
+        if (id_text_search[i].id === id_search) {
+
+            id_text_search[i].date_time = dformat;
+            isIdExist = true;
+            break;
+        }
+    }
+
+    if (!isIdExist) {
+        id_text_search.push(search_his);
+    }
+
+    id_text_search.sort((a, b) => {
+
+        const dateA = new Date(a.date_time);
+        const dateB = new Date(b.date_time);
+
+        return dateB - dateA;
+    });
     var t = JSON.stringify(id_text_search);
 
     document.cookie = 'search_his=' + t + ';expires=' + dformat + '';
 
-    if (searchInputValue != '') {
+    if (id_search != '') {
         var xhr = new XMLHttpRequest();
         var url = '/Home/Search_result_detail';
 
-        xhr.open('GET', url + '?text=' + encodeURIComponent(searchInputValue) + '&lang=' + encodeURIComponent(selectedLang) + '&lang_tran=' + encodeURIComponent(selectedLangTrans), true);
+        xhr.open('GET', url + '?id=' + encodeURIComponent(id_search), true);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById('result').innerHTML = xhr.responseText;
+                result.innerHTML = xhr.responseText;
+
+                if (id_user == null) {
+                    search_word_history_cookie();
+                } else {
+                    search_word_history(id_search,dformat);
+                }
             }
         };
 
@@ -173,25 +266,67 @@ function search_word_detail(target,id_search) {
     }
 }
 
-function search_word_history() {
+function search_word_history(id_word, datetime) {
     var search_history_div = document.querySelector('.search_history');
+    var xhr = new XMLHttpRequest();
+    var url = '/Home/Add_history';
+    xhr.open('GET', url + '?id_user=' + encodeURIComponent(id_user) + '&id_word=' + encodeURIComponent(id_word) + '&datetime=' + encodeURIComponent(datetime), true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            search_history_div.innerHTML = xhr.responseText;
+        }
+    };
+
+    xhr.send();
+}
+
+function get_search_word_history() {
+    var search_history_wrap = document.querySelector('.search_history_wrap ');
+    var search_history_div = search_history_wrap.querySelector('.search_history');
+    var xhr = new XMLHttpRequest();
+    var url = '/Home/History_return';
+    xhr.open('GET', url + '?id_user=' + encodeURIComponent(id_user), true);
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            search_history_div.innerHTML = xhr.responseText;
+        }
+    };
+
+    xhr.send();
+}
+
+function search_word_history_cookie() {
+    var search_history_wrap = document.querySelector('.search_history_wrap ');
+    var search_history_div = search_history_wrap.querySelector('.search_history');
     var ids = [];
 
-    if (id_text_search.length >0) {
+    if (id_text_search.length >= 0) {
         id_text_search.forEach(function (item) {
             var id = item.id;
             ids.push(id)
         });
 
         var jsonData = JSON.stringify(ids);
-        console.log(jsonData);
         var xhr = new XMLHttpRequest();
         var url = '/Home/Item_history';
+        console.log(jsonData);
         xhr.open('GET', url + '?idList=' + encodeURIComponent(jsonData), true);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 search_history_div.innerHTML = xhr.responseText;
+                id_text_search.forEach(item => {
+                    // Tìm phần tử DOM dựa trên data-id-word
+                    var wordItem = search_history_div.querySelector(`.word_item[data-id-word="${item.id}"]`);
+
+                    // Nếu tìm thấy, cập nhật text cho span.phongll
+                    if (wordItem) {
+                        var time_search = wordItem.querySelector('.time_search');
+                        time_search.textContent = "Thời điểm tìm kiếm: " + item.date_time;
+                    }
+                });
             }
         };
 

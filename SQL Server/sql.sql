@@ -89,3 +89,98 @@ VALUES
 (1, 2, 2, 1, N'Computer', N'I use a computer for work', N'An electronic device for storing and processing data'),
 (2, 1, 1, 1, N'Học', N'Tôi đang học tiếng Anh', N'Hành động học hoặc nắm vững kiến thức'),
 (1, 2, 3, 1, N'Happy', N'I am very happy today', N'Feeling or showing pleasure or contentment');
+
+
+
+--- bắt đầu sửa từ đây cập nhật lần cuối 3/12/2023
+
+Alter PROCEDURE GetWordInfoById
+    @WordId INT
+AS
+BEGIN
+    SELECT
+        w.Id AS WordId,
+        w.sWord,
+        w.sDefinition,
+        w.sExample,
+        l.sLanguage,
+        wt.sWordtype
+    FROM
+        tblWord w
+    INNER JOIN
+        tblLanguage l ON w.Id_Language = l.Id
+    INNER JOIN
+        tblWord_type wt ON w.Id_wordtype = wt.Id
+    WHERE
+        w.Id = @WordId;
+END;
+
+
+CREATE PROCEDURE InsertOrUpdateHistorySearch
+    @Id_user INT,
+    @Id_word INT,
+    @dDatetime DATETIME
+AS
+BEGIN
+    -- Kiểm tra xem bản ghi có tồn tại không
+    IF EXISTS (SELECT 1 FROM tblHistory_search WHERE Id_user = @Id_user AND Id_word = @Id_word)
+    BEGIN
+        -- Bản ghi tồn tại, cập nhật dDatetime
+        UPDATE tblHistory_search
+        SET dDatetime = @dDatetime
+        WHERE Id_user = @Id_user AND Id_word = @Id_word;
+    END
+    ELSE
+    BEGIN
+        -- Bản ghi không tồn tại, thêm mới
+        INSERT INTO tblHistory_search (Id_user, Id_word, dDatetime)
+        VALUES (@Id_user, @Id_word, @dDatetime);
+    END
+END;
+
+
+Alter PROCEDURE GetWordsByUserId
+    @Id_user INT
+AS
+BEGIN
+    SELECT
+        w.Id AS WordId,
+        w.sWord,
+        w.sDefinition,
+        w.sExample,
+        l.sLanguage AS OriginalLanguage,
+        wt.sWordtype,
+        w.Id_Language_trans AS Id_Language_trans,
+        lt.sLanguage AS TranslationLanguage,
+        hs.dDatetime,
+        hs.Id_user AS HistoryUserId
+    FROM
+        tblWord w
+    INNER JOIN
+        tblLanguage l ON w.Id_Language = l.Id
+    INNER JOIN
+        tblWord_type wt ON w.Id_wordtype = wt.Id
+    LEFT JOIN
+        tblLanguage lt ON w.Id_Language_trans = lt.Id
+    LEFT JOIN
+        tblHistory_search hs ON w.Id = hs.Id_word AND hs.Id_user = @Id_user
+    WHERE
+        w.Id_user = @Id_user
+        AND hs.Id_user IS NOT NULL
+    ORDER BY
+        hs.dDatetime DESC; -- Sắp xếp theo dDatetime giảm dần
+END;
+
+
+
+CREATE PROCEDURE sp_DeleteHistorySearch
+    @UserId INT,
+    @WordId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DELETE FROM tblHistory_search
+    WHERE Id_user = @UserId
+        AND Id_word = @WordId;
+END;

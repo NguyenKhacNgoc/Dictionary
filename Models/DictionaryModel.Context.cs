@@ -50,5 +50,53 @@ namespace Dictionary.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchWords_Result>("SearchWords", wordParameter, langParameter, lang_transParameter);
         }
+    
+        public virtual ObjectResult<GetWordInfoById_Result> GetWordInfoById(Nullable<int> wordId)
+        {
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWordInfoById_Result>("GetWordInfoById", wordIdParameter);
+        }
+    
+        public virtual int InsertOrUpdateHistorySearch(Nullable<int> id_user, Nullable<int> id_word, Nullable<System.DateTime> dDatetime)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("Id_user", id_user) :
+                new ObjectParameter("Id_user", typeof(int));
+    
+            var id_wordParameter = id_word.HasValue ?
+                new ObjectParameter("Id_word", id_word) :
+                new ObjectParameter("Id_word", typeof(int));
+    
+            var dDatetimeParameter = dDatetime.HasValue ?
+                new ObjectParameter("dDatetime", dDatetime) :
+                new ObjectParameter("dDatetime", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertOrUpdateHistorySearch", id_userParameter, id_wordParameter, dDatetimeParameter);
+        }
+    
+        public virtual ObjectResult<GetWordsByUserId_Result> GetWordsByUserId(Nullable<int> id_user)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("Id_user", id_user) :
+                new ObjectParameter("Id_user", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWordsByUserId_Result>("GetWordsByUserId", id_userParameter);
+        }
+    
+        public virtual int sp_DeleteHistorySearch(Nullable<int> userId, Nullable<int> wordId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var wordIdParameter = wordId.HasValue ?
+                new ObjectParameter("WordId", wordId) :
+                new ObjectParameter("WordId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteHistorySearch", userIdParameter, wordIdParameter);
+        }
     }
 }

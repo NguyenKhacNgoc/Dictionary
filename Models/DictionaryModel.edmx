@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DictionaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DictionaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblHistory_add">
           <Key>
             <PropertyRef Name="Id" />
@@ -156,10 +156,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetWordInfoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="WordId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetWordsByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_user" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertOrUpdateHistorySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_user" Type="int" Mode="In" />
+          <Parameter Name="Id_word" Type="int" Mode="In" />
+          <Parameter Name="dDatetime" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="SearchWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="word" Type="nvarchar" Mode="In" />
           <Parameter Name="lang" Type="nvarchar" Mode="In" />
           <Parameter Name="lang_trans" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteHistorySearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="WordId" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="DictionaryModelStoreContainer">
           <EntitySet Name="tblHistory_add" EntityType="Self.tblHistory_add" Schema="dbo" store:Type="Tables" />
@@ -201,8 +216,7 @@
             <End Role="tblWord" EntitySet="tblWord" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DictionaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -417,6 +431,21 @@
             <Parameter Name="lang" Mode="In" Type="String" />
             <Parameter Name="lang_trans" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetWordInfoById" ReturnType="Collection(DictionaryModel.GetWordInfoById_Result)">
+          <Parameter Name="WordId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertOrUpdateHistorySearch">
+            <Parameter Name="Id_user" Mode="In" Type="Int32" />
+            <Parameter Name="Id_word" Mode="In" Type="Int32" />
+            <Parameter Name="dDatetime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetWordsByUserId" ReturnType="Collection(DictionaryModel.GetWordsByUserId_Result)">
+          <Parameter Name="Id_user" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteHistorySearch">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="WordId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SearchWords_Result">
           <Property Type="String" Name="sWord" Nullable="false" MaxLength="255" />
@@ -424,6 +453,26 @@
           <Property Type="String" Name="sExample" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="sDefinition" Nullable="true" MaxLength="255" />
           <Property Type="Int32" Name="Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetWordInfoById_Result">
+          <Property Type="Int32" Name="WordId" Nullable="false" />
+          <Property Type="String" Name="sWord" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="sDefinition" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="sExample" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="sLanguage" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="sWordtype" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetWordsByUserId_Result">
+          <Property Type="Int32" Name="WordId" Nullable="false" />
+          <Property Type="String" Name="sWord" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="sDefinition" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="sExample" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="OriginalLanguage" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="sWordtype" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Language_trans" Nullable="true" />
+          <Property Type="String" Name="TranslationLanguage" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="dDatetime" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="HistoryUserId" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -503,6 +552,37 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetWordInfoById" FunctionName="DictionaryModel.Store.GetWordInfoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DictionaryModel.GetWordInfoById_Result">
+                <ScalarProperty Name="WordId" ColumnName="WordId" />
+                <ScalarProperty Name="sWord" ColumnName="sWord" />
+                <ScalarProperty Name="sDefinition" ColumnName="sDefinition" />
+                <ScalarProperty Name="sExample" ColumnName="sExample" />
+                <ScalarProperty Name="sLanguage" ColumnName="sLanguage" />
+                <ScalarProperty Name="sWordtype" ColumnName="sWordtype" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertOrUpdateHistorySearch" FunctionName="DictionaryModel.Store.InsertOrUpdateHistorySearch" />
+          <FunctionImportMapping FunctionImportName="GetWordsByUserId" FunctionName="DictionaryModel.Store.GetWordsByUserId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DictionaryModel.GetWordsByUserId_Result">
+                <ScalarProperty Name="WordId" ColumnName="WordId" />
+                <ScalarProperty Name="sWord" ColumnName="sWord" />
+                <ScalarProperty Name="sDefinition" ColumnName="sDefinition" />
+                <ScalarProperty Name="sExample" ColumnName="sExample" />
+                <ScalarProperty Name="OriginalLanguage" ColumnName="OriginalLanguage" />
+                <ScalarProperty Name="sWordtype" ColumnName="sWordtype" />
+                <ScalarProperty Name="Id_Language_trans" ColumnName="Id_Language_trans" />
+                <ScalarProperty Name="TranslationLanguage" ColumnName="TranslationLanguage" />
+                <ScalarProperty Name="dDatetime" ColumnName="dDatetime" />
+                <ScalarProperty Name="HistoryUserId" ColumnName="HistoryUserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_DeleteHistorySearch" FunctionName="DictionaryModel.Store.sp_DeleteHistorySearch" />
+
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

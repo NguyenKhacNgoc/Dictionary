@@ -210,6 +210,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DictionaryModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetWordInfoById_Result.cs">
+      <DependentUpon>DictionaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetWordsByUserId_Result.cs">
+      <DependentUpon>DictionaryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SearchWords_Result.cs">
       <DependentUpon>DictionaryModel.tt</DependentUpon>
     </Compile>
@@ -316,6 +322,8 @@
     <Content Include="Views\Home\Search_result.cshtml" />
     <Content Include="Views\Home\Search_result_detail.cshtml" />
     <Content Include="Views\Home\Item_history.cshtml" />
+    <Content Include="Views\Home\Add_history.cshtml" />
+    <Content Include="Views\Home\History_return.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

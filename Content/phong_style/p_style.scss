@@ -6,17 +6,23 @@
     .p_close,
     .p_close:before,
     .p_close:after,
+    .p_remove,
+    .p_remove:before,
+    .p_remove:after,
     button,
-    .search_in_other {
-        transition: all ease-in 350ms;
+    .search_in_other,
+    .p-tip-content,
+    .sidebar_popup_btn,
+    .search_history_wrap {
+        transition: all ease 350ms;
     }
 
     .dictionary-container .extra_search {
-        transition: all ease-in 400ms;
+        transition: all ease 400ms;
     }
 
     .black_cover {
-        transition: all ease-in 450ms;
+        transition: all ease 450ms;
     }
 
     .black_cover {
@@ -43,7 +49,8 @@
         visibility: hidden;
     }
 
-    .p_close {
+    .p_close,
+    .p_remove {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -55,6 +62,7 @@
         align-items: center;
         justify-content: center;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
 
         &:before, &:after {
             line-height: 50px;
@@ -204,6 +212,7 @@
             width: 100%;
 
             .word_item {
+                position:relative;
                 width: 100%;
             }
         }
@@ -255,37 +264,68 @@
     }
 
     .search_history_wrap {
+        position: fixed;
+        right: 0;
+        height: 100%;
+        top: 0;
         background-color: #fff;
-        padding: 20px;
-        border-radius: 10px 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         max-width: 600px;
-        margin: 30px auto;
+        transform: translateX(100%);
+        z-index: 401;
+
+        &.p_active {
+            transform: translateX(0);
+
+            .p_close {
+                transform: translateX(-50%);
+            }
+        }
+
+        .p_close {
+            left: 0;
+            right: auto;
+        }
+
+        h3 {
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
 
         .search_history {
-            h3 {
-                text-align: center;
-            }
+            padding: 0 20px;
 
             a {
+                position: relative;
                 color: #000;
-                padding: 10px 10px 0px 10px;
+                padding: 10px 40px 10px 0px;
 
                 &:not(:last-child) {
                     &:after {
                         content: '';
                         width: 100%;
                         border-top: 1px solid black;
-                        margin-top: 10px;
+                        position: absolute;
+                        bottom: 0px;
                     }
                 }
 
                 &:last-child {
-                    padding: 10px;
+                    padding-bottom: 10px;
                 }
 
                 .word_text {
                     font-weight: 700;
+                }
+
+                .p_remove {
+                    right: 0;
+                    box-shadow: none;
+
+                    &:hover {
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    }
                 }
             }
         }
@@ -304,5 +344,110 @@
     h1 {
         text-align: center;
         color: #333;
+    }
+
+    .sidebar_popup_btn {
+        position: fixed;
+        bottom: 50px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 1px 1px 10px 1px rgba(0,0,0,.2);
+    }
+
+    .btn-like {
+        position: absolute;
+        right: 10px;
+        top:10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        background-color: #fff;
+        box-shadow: 1px 1px 10px 1px rgba(0,0,0,.2);
+
+        .p-filled {
+            display: none;
+        }
+
+        &.p_added {
+            .p-filled {
+                display:block;
+            }
+        }
+    }
+
+    .sidebar_popup_btn, .btn-like {
+
+        .p-tip-content {
+            position: absolute;
+            white-space: nowrap;
+            right: 100%;
+            opacity: 0;
+            visibility: hidden;
+            background: #333;
+            border-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+
+            &:after {
+                top: 95%;
+                left: 50%;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                border: solid transparent;
+                border-color: transparent;
+                border-top-color: inherit;
+                border-width: 6px;
+                margin-left: -6px;
+            }
+
+
+            &.p-tip-left:after {
+                top: 50%;
+                left: 100%;
+                border-top-color: transparent;
+                border-left-color: inherit;
+                margin-left: -1px;
+                margin-top: -6px;
+            }
+        }
+
+        &:hover {
+            background-color: #0077cc;
+            color: #fff;
+
+            .p-tip-content {
+                right: 150%;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .search_history_wrap {
+        width:480px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .search_history_wrap {
+        width: 100%;
+        max-width:100%;
     }
 }

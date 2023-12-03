@@ -96,6 +96,7 @@ namespace Dictionary.Controllers
                 UserResponseDTO userResponse = new UserResponseDTO();
                 userResponse.sEmail = existingUser.sEmail;
                 userResponse.sRole = existingUser.sRole;
+                userResponse.id = existingUser.Id;
                 HttpCookie cookie = new HttpCookie("LoggedUser");
                 cookie.Value = JsonConvert.SerializeObject(userResponse);
                 //Cookie có thời hạn 7 ngày sau khi đăng nhập

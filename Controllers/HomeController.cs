@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -73,17 +74,18 @@ namespace Dictionary.Controllers
 
         }
 
-        public ActionResult Search_result_detail(string text, string lang, string lang_tran)
+        public ActionResult Search_result_detail(int id)
         {
 
-            var result = dictionaryEntities.SearchWords(text, lang, lang_tran)
-                    .Select(s => new SearchWords_Result
+            var result = dictionaryEntities.GetWordInfoById(id)
+                    .Select(s => new GetWordInfoById_Result
                     {
-                        Id = s.Id,
+                        WordId = s.WordId,
                         sWord = s.sWord,
                         sWordtype = s.sWordtype,
                         sExample = s.sExample,
-                        sDefinition = s.sDefinition
+                        sDefinition = s.sDefinition,
+                        sLanguage = s.sLanguage
                     })
                     .ToList();
 
@@ -94,18 +96,69 @@ namespace Dictionary.Controllers
         {
             List<int> ids = JsonConvert.DeserializeObject<List<int>>(idList);
 
-            ids.Add(6);
-            ids.Add(7);
-            ids.Add(12);
+            //System.Diagnostics.Debug.WriteLine("Values in ids array:");
+            //foreach (var id in ids)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(id);
+            //}
+
             using (var dictionaryEntities = new DictionaryEntities())
             {
                 var words = dictionaryEntities.tblWords
                     .Where(w => ids.Contains(w.Id))
                     .ToList();
 
+                words = words.OrderBy(w => ids.IndexOf(w.Id)).ToList();
+
                 return View(words);
             }
         }
 
+        public ActionResult Add_history(int id_user, int id_word, DateTime datetime)
+        {
+            dictionaryEntities.InsertOrUpdateHistorySearch(id_user, id_word, datetime);
+            var word = dictionaryEntities.GetWordsByUserId(id_user)
+                .Select(s => new GetWordsByUserId_Result { 
+                       WordId= s.WordId,
+                       sWord = s.sWord,
+                       sWordtype = s.sWordtype,
+                       sExample = s.sExample,
+                       sDefinition = s.sDefinition,
+                       OriginalLanguage = s.OriginalLanguage,
+                       Id_Language_trans = s.Id_Language_trans,
+                       TranslationLanguage = s.TranslationLanguage,
+                       dDatetime = s.dDatetime,
+                       HistoryUserId = s.HistoryUserId
+                }).ToList();
+            return View(word);
+        }
+
+
+
+        public ActionResult History_return(int id_user)
+        {
+            var word = dictionaryEntities.GetWordsByUserId(id_user)
+                .Select(s => new GetWordsByUserId_Result
+                {
+                    WordId = s.WordId,
+                    sWord = s.sWord,
+                    sWordtype = s.sWordtype,
+                    sExample = s.sExample,
+                    sDefinition = s.sDefinition,
+                    OriginalLanguage = s.OriginalLanguage,
+                    Id_Language_trans = s.Id_Language_trans,
+                    TranslationLanguage = s.TranslationLanguage,
+                    dDatetime = s.dDatetime,
+                    HistoryUserId = s.HistoryUserId
+                }).ToList();
+            return View(word);
+        }
+
+        public ActionResult Remove_from_history_search(int id_user, int id_word)
+        {
+            dictionaryEntities.sp_DeleteHistorySearch(id_user, id_word);
+
+            return Json(id_user, JsonRequestBehavior.AllowGet);
+        }
     }
 }
