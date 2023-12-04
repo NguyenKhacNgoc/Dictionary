@@ -4,6 +4,13 @@
 <a href="/Admin/Word/InsertWord">Create new</a>
 <input type="button" id="btnAddWord" value="Thêm nhanh" />
 
+
+@* Filter *@
+@*<select id="wordTypeID" name="wordTypeID">
+</select>
+<button class="btnFilter">Filter</button>*@
+
+
 <table class="table_listword">
     <tr>
         <th>
@@ -31,7 +38,7 @@
     </tr>
 
     @foreach (var item in Model)
-{
+    {
         <tr id="@item.Id">
             <td>
                 @item.sWord
@@ -59,7 +66,7 @@
                 <button class="btn_delete_word" data-word-id="@item.Id">Xoá</button>
             </td>
         </tr>
-}
+    }
 
 </table>
 
@@ -131,6 +138,7 @@
         });
 
     }
+
     function testFilterWordType() {
         const wordTypeSelect = document.querySelector("#wordTypeID")
         loadSelectOptions('/Admin/Word/GetWordTypes', wordTypeSelect);
@@ -148,9 +156,10 @@
         })
 
     }
+
     document.addEventListener("DOMContentLoaded", function () {
         deleteWord()
-
+        testFilterWordType()
         var AddWordButton = document.getElementById("btnAddWord")
         AddWordButton.addEventListener("click", function () {
 
@@ -163,6 +172,8 @@
 
         })
     });
+
+
     function loadSelectOptions(url, selectElement) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -190,7 +201,7 @@
 
     function addNewRow() {
         var table = document.querySelector(".table_listword");
-        var newRow = table.insertRow(-1); // -1 để chèn vào cuối cùng
+        var newRow = table.insertRow(1); // 1 để chèn lên đầu
 
         // Thêm các ô input vào hàng mới
         var cell1 = newRow.insertCell(0);

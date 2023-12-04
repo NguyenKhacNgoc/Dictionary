@@ -528,6 +528,7 @@
     <Content Include="Areas\Admin\Views\tblUsers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\_patialWord.cshtml" />
     <None Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.js" />
     <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.min.js" />

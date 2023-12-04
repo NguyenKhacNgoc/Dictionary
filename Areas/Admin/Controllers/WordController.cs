@@ -297,6 +297,12 @@ namespace Dictionary.Areas.Admin.Controllers
             }
 
         }
+        public ActionResult filterWordType(int wordTypeID)
+        {
+            DictionaryEntities db = new DictionaryEntities();
+            List<tblWord> words = db.tblWords.Where(w => w.Id_wordtype == wordTypeID).ToList();
+            return PartialView("_patialWord", words);
+        }
     }
 
 }

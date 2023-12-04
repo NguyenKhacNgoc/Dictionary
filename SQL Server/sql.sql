@@ -48,8 +48,8 @@ CREATE TABLE tblHistory_search (
     Id_user INT,
     Id_word INT,
     dDatetime DATETIME,
-    FOREIGN KEY (Id_user) REFERENCES tblUser(Id) ,
-    FOREIGN KEY (Id_word) REFERENCES tblWord(Id)
+    FOREIGN KEY (Id_user) REFERENCES tblUser(Id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (Id_word) REFERENCES tblWord(Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tạo bảng tblHistory_add với cột id tự động tăng
@@ -58,10 +58,9 @@ CREATE TABLE tblHistory_add (
     Id_user INT,
     Id_word INT,
     dDatetime DATETIME,
-    FOREIGN KEY (Id_user) REFERENCES tblUser(Id) ,
-    FOREIGN KEY (Id_word) REFERENCES tblWord(Id)
+    FOREIGN KEY (Id_user) REFERENCES tblUser(Id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (Id_word) REFERENCES tblWord(Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 
 CREATE  PROCEDURE SearchWords
     @word NVARCHAR(255),
