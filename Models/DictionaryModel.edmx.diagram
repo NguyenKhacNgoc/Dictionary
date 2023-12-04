@@ -4,21 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="85d056cb731549b08c687cdf5bd1e9bf" Name="Diagram1">
+      <Diagram DiagramId="51f54fa4d17542658b2b3226be98d16b" Name="Diagram1">
         <EntityTypeShape EntityType="DictionaryModel.tblHistory_add" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="DictionaryModel.tblHistory_search" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="DictionaryModel.tblLanguage" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="DictionaryModel.tblUser" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DictionaryModel.tblWord" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DictionaryModel.tblWord_type" Width="1.5" PointX="3.75" PointY="10.5" IsExpanded="true" />
-        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_us__0D7A0286" ManuallyRouted="false" />
-        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_wo__0E6E26BF" ManuallyRouted="false" />
-        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_us__09A971A2" ManuallyRouted="false" />
-        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_wo__0A9D95DB" ManuallyRouted="false" />
-        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_Lang__03F0984C" ManuallyRouted="false" />
-        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_Lang__04E4BC85" ManuallyRouted="false" />
-        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_user__06CD04F7" ManuallyRouted="false" />
-        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_word__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_us__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_wo__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_us__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblHistor__Id_wo__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_Lang__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_Lang__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_user__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryModel.FK__tblWord__Id_word__6383C8BA" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

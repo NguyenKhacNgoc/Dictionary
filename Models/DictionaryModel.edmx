@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DictionaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DictionaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblHistory_add">
           <Key>
             <PropertyRef Name="Id" />
@@ -60,8 +60,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="sWordtype" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblHistor__Id_us__09A971A2">
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_us__68487DD7">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_search" Type="Self.tblHistory_search" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblUser">
@@ -72,8 +74,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__Id_us__0D7A0286">
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_us__6C190EBB">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_add" Type="Self.tblHistory_add" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblUser">
@@ -84,8 +88,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__Id_wo__0A9D95DB">
-          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_wo__693CA210">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_search" Type="Self.tblHistory_search" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblWord">
@@ -96,8 +102,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__Id_wo__0E6E26BF">
-          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_wo__6D0D32F4">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_add" Type="Self.tblHistory_add" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblWord">
@@ -108,7 +116,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_Lang__03F0984C">
+        <Association Name="FK__tblWord__Id_Lang__619B8048">
           <End Role="tblLanguage" Type="Self.tblLanguage" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -120,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_Lang__04E4BC85">
+        <Association Name="FK__tblWord__Id_Lang__628FA481">
           <End Role="tblLanguage" Type="Self.tblLanguage" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -132,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_user__06CD04F7">
+        <Association Name="FK__tblWord__Id_user__6477ECF3">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -144,7 +152,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_word__05D8E0BE">
+        <Association Name="FK__tblWord__Id_word__6383C8BA">
           <End Role="tblWord_type" Type="Self.tblWord_type" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -183,40 +191,41 @@
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWord" EntityType="Self.tblWord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblWord_type" EntityType="Self.tblWord_type" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblHistor__Id_us__09A971A2" Association="Self.FK__tblHistor__Id_us__09A971A2">
+          <AssociationSet Name="FK__tblHistor__Id_us__68487DD7" Association="Self.FK__tblHistor__Id_us__68487DD7">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblHistory_search" EntitySet="tblHistory_search" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__Id_us__0D7A0286" Association="Self.FK__tblHistor__Id_us__0D7A0286">
+          <AssociationSet Name="FK__tblHistor__Id_us__6C190EBB" Association="Self.FK__tblHistor__Id_us__6C190EBB">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblHistory_add" EntitySet="tblHistory_add" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__Id_wo__0A9D95DB" Association="Self.FK__tblHistor__Id_wo__0A9D95DB">
+          <AssociationSet Name="FK__tblHistor__Id_wo__693CA210" Association="Self.FK__tblHistor__Id_wo__693CA210">
             <End Role="tblWord" EntitySet="tblWord" />
             <End Role="tblHistory_search" EntitySet="tblHistory_search" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__Id_wo__0E6E26BF" Association="Self.FK__tblHistor__Id_wo__0E6E26BF">
+          <AssociationSet Name="FK__tblHistor__Id_wo__6D0D32F4" Association="Self.FK__tblHistor__Id_wo__6D0D32F4">
             <End Role="tblWord" EntitySet="tblWord" />
             <End Role="tblHistory_add" EntitySet="tblHistory_add" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_Lang__03F0984C" Association="Self.FK__tblWord__Id_Lang__03F0984C">
+          <AssociationSet Name="FK__tblWord__Id_Lang__619B8048" Association="Self.FK__tblWord__Id_Lang__619B8048">
             <End Role="tblLanguage" EntitySet="tblLanguage" />
             <End Role="tblWord" EntitySet="tblWord" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_Lang__04E4BC85" Association="Self.FK__tblWord__Id_Lang__04E4BC85">
+          <AssociationSet Name="FK__tblWord__Id_Lang__628FA481" Association="Self.FK__tblWord__Id_Lang__628FA481">
             <End Role="tblLanguage" EntitySet="tblLanguage" />
             <End Role="tblWord" EntitySet="tblWord" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_user__06CD04F7" Association="Self.FK__tblWord__Id_user__06CD04F7">
+          <AssociationSet Name="FK__tblWord__Id_user__6477ECF3" Association="Self.FK__tblWord__Id_user__6477ECF3">
             <End Role="tblUser" EntitySet="tblUser" />
             <End Role="tblWord" EntitySet="tblWord" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_word__05D8E0BE" Association="Self.FK__tblWord__Id_word__05D8E0BE">
+          <AssociationSet Name="FK__tblWord__Id_word__6383C8BA" Association="Self.FK__tblWord__Id_word__6383C8BA">
             <End Role="tblWord_type" EntitySet="tblWord_type" />
             <End Role="tblWord" EntitySet="tblWord" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DictionaryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -228,8 +237,8 @@
           <Property Name="Id_user" Type="Int32" />
           <Property Name="Id_word" Type="Int32" />
           <Property Name="dDatetime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblHistor__Id_us__0D7A0286" FromRole="tblHistory_add" ToRole="tblUser" />
-          <NavigationProperty Name="tblWord" Relationship="Self.FK__tblHistor__Id_wo__0E6E26BF" FromRole="tblHistory_add" ToRole="tblWord" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblHistor__Id_us__6C190EBB" FromRole="tblHistory_add" ToRole="tblUser" />
+          <NavigationProperty Name="tblWord" Relationship="Self.FK__tblHistor__Id_wo__6D0D32F4" FromRole="tblHistory_add" ToRole="tblWord" />
         </EntityType>
         <EntityType Name="tblHistory_search">
           <Key>
@@ -239,8 +248,8 @@
           <Property Name="Id_user" Type="Int32" />
           <Property Name="Id_word" Type="Int32" />
           <Property Name="dDatetime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblHistor__Id_us__09A971A2" FromRole="tblHistory_search" ToRole="tblUser" />
-          <NavigationProperty Name="tblWord" Relationship="Self.FK__tblHistor__Id_wo__0A9D95DB" FromRole="tblHistory_search" ToRole="tblWord" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblHistor__Id_us__68487DD7" FromRole="tblHistory_search" ToRole="tblUser" />
+          <NavigationProperty Name="tblWord" Relationship="Self.FK__tblHistor__Id_wo__693CA210" FromRole="tblHistory_search" ToRole="tblWord" />
         </EntityType>
         <EntityType Name="tblLanguage">
           <Key>
@@ -248,8 +257,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sLanguage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_Lang__03F0984C" FromRole="tblLanguage" ToRole="tblWord" />
-          <NavigationProperty Name="tblWords1" Relationship="Self.FK__tblWord__Id_Lang__04E4BC85" FromRole="tblLanguage" ToRole="tblWord" />
+          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_Lang__619B8048" FromRole="tblLanguage" ToRole="tblWord" />
+          <NavigationProperty Name="tblWords1" Relationship="Self.FK__tblWord__Id_Lang__628FA481" FromRole="tblLanguage" ToRole="tblWord" />
         </EntityType>
         <EntityType Name="tblUser">
           <Key>
@@ -260,9 +269,9 @@
           <Property Name="sPasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sSalt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblHistory_add" Relationship="Self.FK__tblHistor__Id_us__0D7A0286" FromRole="tblUser" ToRole="tblHistory_add" />
-          <NavigationProperty Name="tblHistory_search" Relationship="Self.FK__tblHistor__Id_us__09A971A2" FromRole="tblUser" ToRole="tblHistory_search" />
-          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_user__06CD04F7" FromRole="tblUser" ToRole="tblWord" />
+          <NavigationProperty Name="tblHistory_add" Relationship="Self.FK__tblHistor__Id_us__6C190EBB" FromRole="tblUser" ToRole="tblHistory_add" />
+          <NavigationProperty Name="tblHistory_search" Relationship="Self.FK__tblHistor__Id_us__68487DD7" FromRole="tblUser" ToRole="tblHistory_search" />
+          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_user__6477ECF3" FromRole="tblUser" ToRole="tblWord" />
         </EntityType>
         <EntityType Name="tblWord">
           <Key>
@@ -276,12 +285,12 @@
           <Property Name="sWord" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="sExample" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="sDefinition" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblHistory_add" Relationship="Self.FK__tblHistor__Id_wo__0E6E26BF" FromRole="tblWord" ToRole="tblHistory_add" />
-          <NavigationProperty Name="tblHistory_search" Relationship="Self.FK__tblHistor__Id_wo__0A9D95DB" FromRole="tblWord" ToRole="tblHistory_search" />
-          <NavigationProperty Name="tblLanguage" Relationship="Self.FK__tblWord__Id_Lang__03F0984C" FromRole="tblWord" ToRole="tblLanguage" />
-          <NavigationProperty Name="tblLanguage1" Relationship="Self.FK__tblWord__Id_Lang__04E4BC85" FromRole="tblWord" ToRole="tblLanguage" />
-          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblWord__Id_user__06CD04F7" FromRole="tblWord" ToRole="tblUser" />
-          <NavigationProperty Name="tblWord_type" Relationship="Self.FK__tblWord__Id_word__05D8E0BE" FromRole="tblWord" ToRole="tblWord_type" />
+          <NavigationProperty Name="tblHistory_add" Relationship="Self.FK__tblHistor__Id_wo__6D0D32F4" FromRole="tblWord" ToRole="tblHistory_add" />
+          <NavigationProperty Name="tblHistory_search" Relationship="Self.FK__tblHistor__Id_wo__693CA210" FromRole="tblWord" ToRole="tblHistory_search" />
+          <NavigationProperty Name="tblLanguage" Relationship="Self.FK__tblWord__Id_Lang__619B8048" FromRole="tblWord" ToRole="tblLanguage" />
+          <NavigationProperty Name="tblLanguage1" Relationship="Self.FK__tblWord__Id_Lang__628FA481" FromRole="tblWord" ToRole="tblLanguage" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblWord__Id_user__6477ECF3" FromRole="tblWord" ToRole="tblUser" />
+          <NavigationProperty Name="tblWord_type" Relationship="Self.FK__tblWord__Id_word__6383C8BA" FromRole="tblWord" ToRole="tblWord_type" />
         </EntityType>
         <EntityType Name="tblWord_type">
           <Key>
@@ -289,10 +298,12 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="sWordtype" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_word__05D8E0BE" FromRole="tblWord_type" ToRole="tblWord" />
+          <NavigationProperty Name="tblWords" Relationship="Self.FK__tblWord__Id_word__6383C8BA" FromRole="tblWord_type" ToRole="tblWord" />
         </EntityType>
-        <Association Name="FK__tblHistor__Id_us__0D7A0286">
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_us__6C190EBB">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_add" Type="Self.tblHistory_add" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblUser">
@@ -303,8 +314,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__Id_wo__0E6E26BF">
-          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_wo__6D0D32F4">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_add" Type="Self.tblHistory_add" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblWord">
@@ -315,8 +328,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__Id_us__09A971A2">
-          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_us__68487DD7">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_search" Type="Self.tblHistory_search" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblUser">
@@ -327,8 +342,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblHistor__Id_wo__0A9D95DB">
-          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1" />
+        <Association Name="FK__tblHistor__Id_wo__693CA210">
+          <End Role="tblWord" Type="Self.tblWord" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="tblHistory_search" Type="Self.tblHistory_search" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblWord">
@@ -339,7 +356,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_Lang__03F0984C">
+        <Association Name="FK__tblWord__Id_Lang__619B8048">
           <End Role="tblLanguage" Type="Self.tblLanguage" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -351,7 +368,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_Lang__04E4BC85">
+        <Association Name="FK__tblWord__Id_Lang__628FA481">
           <End Role="tblLanguage" Type="Self.tblLanguage" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -363,7 +380,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_user__06CD04F7">
+        <Association Name="FK__tblWord__Id_user__6477ECF3">
           <End Role="tblUser" Type="Self.tblUser" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -375,7 +392,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblWord__Id_word__05D8E0BE">
+        <Association Name="FK__tblWord__Id_word__6383C8BA">
           <End Role="tblWord_type" Type="Self.tblWord_type" Multiplicity="0..1" />
           <End Role="tblWord" Type="Self.tblWord" Multiplicity="*" />
           <ReferentialConstraint>
@@ -394,66 +411,59 @@
           <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
           <EntitySet Name="tblWords" EntityType="Self.tblWord" />
           <EntitySet Name="tblWord_type" EntityType="Self.tblWord_type" />
-          <AssociationSet Name="FK__tblHistor__Id_us__0D7A0286" Association="Self.FK__tblHistor__Id_us__0D7A0286">
+          <AssociationSet Name="FK__tblHistor__Id_us__6C190EBB" Association="Self.FK__tblHistor__Id_us__6C190EBB">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblHistory_add" EntitySet="tblHistory_add" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__Id_wo__0E6E26BF" Association="Self.FK__tblHistor__Id_wo__0E6E26BF">
+          <AssociationSet Name="FK__tblHistor__Id_wo__6D0D32F4" Association="Self.FK__tblHistor__Id_wo__6D0D32F4">
             <End Role="tblWord" EntitySet="tblWords" />
             <End Role="tblHistory_add" EntitySet="tblHistory_add" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__Id_us__09A971A2" Association="Self.FK__tblHistor__Id_us__09A971A2">
+          <AssociationSet Name="FK__tblHistor__Id_us__68487DD7" Association="Self.FK__tblHistor__Id_us__68487DD7">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblHistory_search" EntitySet="tblHistory_search" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblHistor__Id_wo__0A9D95DB" Association="Self.FK__tblHistor__Id_wo__0A9D95DB">
+          <AssociationSet Name="FK__tblHistor__Id_wo__693CA210" Association="Self.FK__tblHistor__Id_wo__693CA210">
             <End Role="tblWord" EntitySet="tblWords" />
             <End Role="tblHistory_search" EntitySet="tblHistory_search" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_Lang__03F0984C" Association="Self.FK__tblWord__Id_Lang__03F0984C">
+          <AssociationSet Name="FK__tblWord__Id_Lang__619B8048" Association="Self.FK__tblWord__Id_Lang__619B8048">
             <End Role="tblLanguage" EntitySet="tblLanguages" />
             <End Role="tblWord" EntitySet="tblWords" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_Lang__04E4BC85" Association="Self.FK__tblWord__Id_Lang__04E4BC85">
+          <AssociationSet Name="FK__tblWord__Id_Lang__628FA481" Association="Self.FK__tblWord__Id_Lang__628FA481">
             <End Role="tblLanguage" EntitySet="tblLanguages" />
             <End Role="tblWord" EntitySet="tblWords" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_user__06CD04F7" Association="Self.FK__tblWord__Id_user__06CD04F7">
+          <AssociationSet Name="FK__tblWord__Id_user__6477ECF3" Association="Self.FK__tblWord__Id_user__6477ECF3">
             <End Role="tblUser" EntitySet="tblUsers" />
             <End Role="tblWord" EntitySet="tblWords" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblWord__Id_word__05D8E0BE" Association="Self.FK__tblWord__Id_word__05D8E0BE">
+          <AssociationSet Name="FK__tblWord__Id_word__6383C8BA" Association="Self.FK__tblWord__Id_word__6383C8BA">
             <End Role="tblWord_type" EntitySet="tblWord_type" />
             <End Role="tblWord" EntitySet="tblWords" />
           </AssociationSet>
-          <FunctionImport Name="SearchWords" ReturnType="Collection(DictionaryModel.SearchWords_Result)">
-            <Parameter Name="word" Mode="In" Type="String" />
-            <Parameter Name="lang" Mode="In" Type="String" />
-            <Parameter Name="lang_trans" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="GetWordInfoById" ReturnType="Collection(DictionaryModel.GetWordInfoById_Result)">
-          <Parameter Name="WordId" Mode="In" Type="Int32" />
+            <Parameter Name="WordId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWordsByUserId" ReturnType="Collection(DictionaryModel.GetWordsByUserId_Result)">
+            <Parameter Name="Id_user" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="InsertOrUpdateHistorySearch">
             <Parameter Name="Id_user" Mode="In" Type="Int32" />
             <Parameter Name="Id_word" Mode="In" Type="Int32" />
             <Parameter Name="dDatetime" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="GetWordsByUserId" ReturnType="Collection(DictionaryModel.GetWordsByUserId_Result)">
-          <Parameter Name="Id_user" Mode="In" Type="Int32" />
+          <FunctionImport Name="SearchWords" ReturnType="Collection(DictionaryModel.SearchWords_Result)">
+            <Parameter Name="word" Mode="In" Type="String" />
+            <Parameter Name="lang" Mode="In" Type="String" />
+            <Parameter Name="lang_trans" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_DeleteHistorySearch">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="WordId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="SearchWords_Result">
-          <Property Type="String" Name="sWord" Nullable="false" MaxLength="255" />
-          <Property Type="String" Name="sWordtype" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="sExample" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="sDefinition" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="Id" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="GetWordInfoById_Result">
           <Property Type="Int32" Name="WordId" Nullable="false" />
           <Property Type="String" Name="sWord" Nullable="false" MaxLength="255" />
@@ -473,6 +483,13 @@
           <Property Type="String" Name="TranslationLanguage" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="dDatetime" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="HistoryUserId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SearchWords_Result">
+          <Property Type="String" Name="sWord" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="sWordtype" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="sExample" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="sDefinition" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Id" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -541,17 +558,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SearchWords" FunctionName="DictionaryModel.Store.SearchWords">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DictionaryModel.SearchWords_Result">
-                <ScalarProperty Name="sWord" ColumnName="sWord" />
-                <ScalarProperty Name="sWordtype" ColumnName="sWordtype" />
-                <ScalarProperty Name="sExample" ColumnName="sExample" />
-                <ScalarProperty Name="sDefinition" ColumnName="sDefinition" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetWordInfoById" FunctionName="DictionaryModel.Store.GetWordInfoById">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DictionaryModel.GetWordInfoById_Result">
@@ -564,7 +570,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="InsertOrUpdateHistorySearch" FunctionName="DictionaryModel.Store.InsertOrUpdateHistorySearch" />
           <FunctionImportMapping FunctionImportName="GetWordsByUserId" FunctionName="DictionaryModel.Store.GetWordsByUserId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="DictionaryModel.GetWordsByUserId_Result">
@@ -581,8 +586,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertOrUpdateHistorySearch" FunctionName="DictionaryModel.Store.InsertOrUpdateHistorySearch" />
+          <FunctionImportMapping FunctionImportName="SearchWords" FunctionName="DictionaryModel.Store.SearchWords">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DictionaryModel.SearchWords_Result">
+                <ScalarProperty Name="sWord" ColumnName="sWord" />
+                <ScalarProperty Name="sWordtype" ColumnName="sWordtype" />
+                <ScalarProperty Name="sExample" ColumnName="sExample" />
+                <ScalarProperty Name="sDefinition" ColumnName="sDefinition" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_DeleteHistorySearch" FunctionName="DictionaryModel.Store.sp_DeleteHistorySearch" />
-
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

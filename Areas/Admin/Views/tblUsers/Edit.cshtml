@@ -1,0 +1,45 @@
+﻿@model Dictionary.Models.EditUserRoleViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+    <h2>Cập nhật quyền cho người dùng</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>User</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.sRole, "Quyền", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.sRole, new SelectList(new List<Object>
+                    {
+                        new { value = "User", text = "User" },
+                        new { value = "Admin", text = "Admin" }
+                    }, "value", "text"), "-- Chọn quyền --", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.sRole, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="container">
+        <div class="col-md-12">
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>

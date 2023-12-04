@@ -1,0 +1,66 @@
+﻿@model Dictionary.Models.tblWord
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>Chi tiết từ</h2>
+
+    <div class="well">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Ngôn ngữ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tblLanguage.sLanguage)
+            </dd>
+
+            <dt>
+                Loại từ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tblWord_type.sWordtype)
+            </dd>
+
+            <dt>
+                Từ
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sWord)
+            </dd>
+
+            <dt>
+                Ví dụ
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.sExample)
+            </dd>
+            <dt>
+                Ngôn ngữ dịch 
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tblLanguage1.sLanguage)
+            </dd>
+            <dt>
+                Mô tả cho ngôn ngữ dịch
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sDefinition)
+            </dd>
+
+
+        </dl>
+    </div>
+
+    <div class="container">
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" }) |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </p>
+    </div>
+</div>

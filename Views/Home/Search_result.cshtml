@@ -3,12 +3,17 @@
 @{
     Layout = null;
 }
-
+@{ 
+    var uniqueWords = Model.GroupBy(x => x.sWord)
+                      .Select(g => g.First())
+                      .ToList();
+}
+   
 @if (Model != null && Model.Any())
 {<h3>Chúng tôi đã tìm thấy</h3>
-
+     
     <div class="p_drop_down">
-        @foreach (var item in Model)
+        @foreach (var item in uniqueWords)
         {
             <a href="javascript:void(0)" class="word_item p_flex_start" data-id-word="@Html.DisplayFor(modelItem => item.Id)">
                 <span class="word_text">@Html.DisplayFor(modelItem => item.sWord)</span>
@@ -26,9 +31,9 @@ else
     <h3>Không tìm thấy từ bạn vừa nhập</h3>
     <div class="p_drop_down">
 
-            <a href="javascript:void(0)" data-type="@ViewData["type"]" data-loading-text="@ViewData["text"]" class="search_in_other p_flex_start">
-                Tìm kiếm từ web khác
-            </a>
+        <a href="javascript:void(0)" data-type="@ViewData["type"]" data-loading-text="@ViewData["text"]" class="search_in_other p_flex_start">
+            Tìm kiếm từ web khác
+        </a>
 
     </div>
 }

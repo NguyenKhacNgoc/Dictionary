@@ -277,7 +277,7 @@ function search_word_history(id_word, datetime) {
             search_history_div.innerHTML = xhr.responseText;
         }
     };
-
+ 
     xhr.send();
 }
 
@@ -293,7 +293,7 @@ function get_search_word_history() {
             search_history_div.innerHTML = xhr.responseText;
         }
     };
-
+    console.log(id_user);
     xhr.send();
 }
 

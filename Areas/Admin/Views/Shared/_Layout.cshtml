@@ -1,64 +1,43 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - HAPNDictionary</title>
-    <link rel="stylesheet" href="~/Content/Site.css" />
-    <link rel="stylesheet" href="~/Content/phong_style/p_style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]Admin Manager </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
-
 <body>
     <header>
-        <div class="header-container">
-            <a class="logo" href="/">HAPNDictionary</a>
-            <div class="user-links">
-                @if (Request.Cookies["LoggedUser"] != null)
-                {
-                    var userCookie = Request.Cookies["LoggedUser"].Value;
-                    var existingUser = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary.Models.tblUser>(userCookie);
-
-                    <span>Xin chào, @existingUser.sEmail!</span>
-                    <a href="/Admin/Admin/Index">Chức năng cho đội phát triển</a>
-                    <button class="btn_logoutUser">Đăng xuất</button>
-                }
-                else
-                {
-                    <a href="/User/Login">Đăng nhập</a>
-                    <a href="/Admin/Amin/SignUp">Đăng ký</a>
-                }
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/Home/Index">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Admin/Word">Word</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/Admin/tblUsers">User</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+    @RenderBody()
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Admin Manager
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
 </body>
 </html>
-<style>
-    .btn_logoutUser {
-        border: none;
-        background: none;
-        color: inherit;
-        cursor: pointer;
-    }
-
-        .btn_logoutUser:hover {
-            color: red;
-        }
-</style>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var btnLogout = document.querySelector('.btn_logoutUser')
-        if (btnLogout) {
-            btnLogout.addEventListener('click', function () {
-
-                document.cookie = "LoggedUser=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                location.reload()
-            })
-        }
-
-    })
-</script>
-

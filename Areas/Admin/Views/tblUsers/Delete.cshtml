@@ -1,0 +1,45 @@
+﻿@model Dictionary.Models.tblUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+    <div class="container">
+        <h2>Xóa User</h2>
+
+        <div class="alert alert-danger">
+            <strong>Warning!</strong> Bạn có chắc chắn muốn xóa?
+        </div>
+        <div class="well">
+            <h4>Chi tiết User</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Email
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.sEmail)
+                </dd>
+
+                <dt>
+                    Quyền
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.sRole)
+                </dd>
+            </dl>
+        </div>
+
+        @using (Html.BeginForm("Delete", "tblUsers", new { id = Model.Id }, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Xóa" class="btn btn-danger" />
+                    @Html.ActionLink("Hủy", "Index", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+</div>

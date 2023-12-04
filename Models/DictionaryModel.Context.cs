@@ -34,23 +34,6 @@ namespace Dictionary.Models
         public virtual DbSet<tblWord> tblWords { get; set; }
         public virtual DbSet<tblWord_type> tblWord_type { get; set; }
     
-        public virtual ObjectResult<SearchWords_Result> SearchWords(string word, string lang, string lang_trans)
-        {
-            var wordParameter = word != null ?
-                new ObjectParameter("word", word) :
-                new ObjectParameter("word", typeof(string));
-    
-            var langParameter = lang != null ?
-                new ObjectParameter("lang", lang) :
-                new ObjectParameter("lang", typeof(string));
-    
-            var lang_transParameter = lang_trans != null ?
-                new ObjectParameter("lang_trans", lang_trans) :
-                new ObjectParameter("lang_trans", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchWords_Result>("SearchWords", wordParameter, langParameter, lang_transParameter);
-        }
-    
         public virtual ObjectResult<GetWordInfoById_Result> GetWordInfoById(Nullable<int> wordId)
         {
             var wordIdParameter = wordId.HasValue ?
@@ -58,6 +41,15 @@ namespace Dictionary.Models
                 new ObjectParameter("WordId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWordInfoById_Result>("GetWordInfoById", wordIdParameter);
+        }
+    
+        public virtual ObjectResult<GetWordsByUserId_Result> GetWordsByUserId(Nullable<int> id_user)
+        {
+            var id_userParameter = id_user.HasValue ?
+                new ObjectParameter("Id_user", id_user) :
+                new ObjectParameter("Id_user", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWordsByUserId_Result>("GetWordsByUserId", id_userParameter);
         }
     
         public virtual int InsertOrUpdateHistorySearch(Nullable<int> id_user, Nullable<int> id_word, Nullable<System.DateTime> dDatetime)
@@ -77,13 +69,21 @@ namespace Dictionary.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertOrUpdateHistorySearch", id_userParameter, id_wordParameter, dDatetimeParameter);
         }
     
-        public virtual ObjectResult<GetWordsByUserId_Result> GetWordsByUserId(Nullable<int> id_user)
+        public virtual ObjectResult<SearchWords_Result> SearchWords(string word, string lang, string lang_trans)
         {
-            var id_userParameter = id_user.HasValue ?
-                new ObjectParameter("Id_user", id_user) :
-                new ObjectParameter("Id_user", typeof(int));
+            var wordParameter = word != null ?
+                new ObjectParameter("word", word) :
+                new ObjectParameter("word", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWordsByUserId_Result>("GetWordsByUserId", id_userParameter);
+            var langParameter = lang != null ?
+                new ObjectParameter("lang", lang) :
+                new ObjectParameter("lang", typeof(string));
+    
+            var lang_transParameter = lang_trans != null ?
+                new ObjectParameter("lang_trans", lang_trans) :
+                new ObjectParameter("lang_trans", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchWords_Result>("SearchWords", wordParameter, langParameter, lang_transParameter);
         }
     
         public virtual int sp_DeleteHistorySearch(Nullable<int> userId, Nullable<int> wordId)

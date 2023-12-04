@@ -76,7 +76,8 @@ namespace Dictionary.Controllers
 
         public ActionResult Search_result_detail(int id)
         {
-
+            System.Diagnostics.Debug.WriteLine("Values in ids array:" + id);
+        
             var result = dictionaryEntities.GetWordInfoById(id)
                     .Select(s => new GetWordInfoById_Result
                     {
@@ -116,6 +117,7 @@ namespace Dictionary.Controllers
 
         public ActionResult Add_history(int id_user, int id_word, DateTime datetime)
         {
+            System.Diagnostics.Debug.WriteLine("History 3 :" + id_user + id_word + datetime);
             dictionaryEntities.InsertOrUpdateHistorySearch(id_user, id_word, datetime);
             var word = dictionaryEntities.GetWordsByUserId(id_user)
                 .Select(s => new GetWordsByUserId_Result { 
@@ -151,6 +153,7 @@ namespace Dictionary.Controllers
                     dDatetime = s.dDatetime,
                     HistoryUserId = s.HistoryUserId
                 }).ToList();
+            System.Diagnostics.Debug.WriteLine("History User:" + id_user);
             return View(word);
         }
 
