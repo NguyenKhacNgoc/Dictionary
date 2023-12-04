@@ -1,0 +1,135 @@
+﻿@model Dictionary.Models.tblWord
+<form action="/Admin/Word/InsertWord" method="post">
+    <label>Từ</label>
+    <input type="text" id="sWord" name="sWord" placeholder="Từ" />
+    <label>Ví dụ</label>
+    <textarea type="text" id="sExample" name="sExample" placeholder="Ví dụ" ></textarea>
+    <label>Định nghĩa</label>
+    <textarea type="text" id="sDefinition" name="sDefinition" placeholder="Định nghĩa"  ></textarea>
+    <label>Ngôn ngữ</label>
+    <select id="Id_Language" name="Id_Language">
+    </select>
+    <label>Dịch sang</label>
+    <select id="Id_Language_trans" name="Id_Language_trans">
+    </select>
+    <label>Loại từ</label>
+    <select id="Id_wordtype" name="Id_wordtype">
+    </select>
+    <label>Người thêm</label>
+    <select id="Id_user" name="Id_user">
+        @if (Request.Cookies["LoggedUser"] != null)
+        {
+            var userCookie = Request.Cookies["LoggedUser"].Value;
+            var existingUser = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary.Models.tblUser>(userCookie);
+            <option value="@existingUser.Id">@existingUser.sEmail</option>
+        }
+        else
+        {
+            <option disabled value="">Lỗi</option>
+        }
+    </select>
+    <input type="submit" />
+
+</form>
+<style>
+    form {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input, textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url('https://cdn3.iconfinder.com/data/icons/fatcow/32/arrow_down.png') no-repeat scroll right center transparent;
+        background-size: 20px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    /* Optional: Add some styling for placeholders */
+    input::placeholder,
+    select::placeholder {
+        color: #999;
+    }
+
+    /* Optional: Style for disabled option */
+    option[disabled] {
+        color: #999;
+    }
+
+
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lấy các thẻ select
+        var languageSelect = document.querySelector('#Id_Language');
+        var languageSelectTrans = document.querySelector("#Id_Language_trans")
+        var wordTypeSelect = document.querySelector('#Id_wordtype');
+
+        // Gọi hàm để lấy dữ liệu và điền vào các select
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelect);
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelectTrans);
+        loadSelectOptions('/Admin/Word/GetWordTypes', wordTypeSelect);
+    });
+
+    // Hàm để gửi yêu cầu Ajax và điền dữ liệu vào select
+    function loadSelectOptions(url, selectElement) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.status === 200) {
+                var options = JSON.parse(xhr.responseText);
+
+                // Xóa tất cả các option hiện tại
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
+
+                // Thêm option mới từ dữ liệu nhận được
+                options.forEach(function (option) {
+                    var optionElement = document.createElement('option');
+                    optionElement.value = option.value;
+                    optionElement.text = option.text;
+                    selectElement.appendChild(optionElement);
+                });
+            }
+        };
+
+        xhr.open('GET', url, true);
+        xhr.send();
+    }
+</script>
+

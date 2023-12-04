@@ -89,7 +89,7 @@ namespace Dictionary.Controllers
 
             return View(result);
         }
-
+        /*
         public ActionResult Item_history(string idList)
         {
             List<int> ids = JsonConvert.DeserializeObject<List<int>>(idList);
@@ -105,7 +105,8 @@ namespace Dictionary.Controllers
 
                 return View(words);
             }
-        }
+        }*/
+        
 
     }
 }

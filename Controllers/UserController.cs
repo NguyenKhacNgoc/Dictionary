@@ -13,7 +13,7 @@ namespace Dictionary.Controllers
 {
     public class UserController : Controller
     {
-        
+
         // GET: User
         public ActionResult Index()
         {
@@ -27,7 +27,7 @@ namespace Dictionary.Controllers
         public ActionResult SignUp(UserDTO model)
         {
 
-            
+
             DictionaryEntities db = new DictionaryEntities();
             var existingUser = db.tblUsers.FirstOrDefault(x => x.sEmail == model.sEmail);
             if (existingUser != null)
@@ -56,10 +56,10 @@ namespace Dictionary.Controllers
                 return RedirectToAction("Login");
 
             }
-            
+
 
         }
-        
+
         // Hàm tạo salt ngẫu nhiên
         private byte[] GenerateSalt()
         {
@@ -85,7 +85,7 @@ namespace Dictionary.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(UserDTO model) 
+        public ActionResult Login(UserDTO model)
         {
             DictionaryEntities db = new DictionaryEntities();
             var existingUser = db.tblUsers.FirstOrDefault(x => x.sEmail == model.sEmail);
@@ -94,6 +94,7 @@ namespace Dictionary.Controllers
                 TempData["response"] = "Đăng nhập thành công";
                 //Lưu người dùng vào cookies
                 UserResponseDTO userResponse = new UserResponseDTO();
+                userResponse.Id = existingUser.Id;
                 userResponse.sEmail = existingUser.sEmail;
                 userResponse.sRole = existingUser.sRole;
                 HttpCookie cookie = new HttpCookie("LoggedUser");
@@ -102,7 +103,7 @@ namespace Dictionary.Controllers
                 cookie.Expires = DateTime.Now.AddDays(7);
                 Response.Cookies.Add(cookie);
                 return RedirectToAction("Index", "Home");
-                
+
 
             }
             else if (existingUser != null && !VerifyPassword(model.sPassword, existingUser.sPasswordHash, existingUser.sSalt) && existingUser.sRole.Equals("User"))
@@ -118,7 +119,8 @@ namespace Dictionary.Controllers
                 return View(model);
 
             }
-            
+
+
 
 
         }
@@ -135,6 +137,15 @@ namespace Dictionary.Controllers
                 return hashBytes.SequenceEqual(storedHash);
             }
         }
-        
+
+
+        public ActionResult showpassword(UserDTO request)
+        {
+
+
+            return Json(new { Success = true });
+        }
+
+
     }
 }

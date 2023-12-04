@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -49,10 +50,10 @@
       <HintPath>packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Enums.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
       <HintPath>packages\Enums.NET.4.0.1\lib\net45\Enums.NET.dll</HintPath>
@@ -188,114 +189,84 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\UserResponseDTO.cs" />
+    <Compile Include="DTO\WordDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DictionaryModel.Context.cs">
+    <Compile Include="Models\ModelDictionary.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DictionaryModel.Context.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DictionaryModel.cs">
+    <Compile Include="Models\ModelDictionary.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DictionaryModel.Designer.cs">
+    <Compile Include="Models\ModelDictionary.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DictionaryModel.edmx</DependentUpon>
+      <DependentUpon>ModelDictionary.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SearchWords_Result.cs">
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblHistory_add.cs">
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblHistory_search.cs">
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblLanguage.cs">
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblUser.cs">
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblWord.cs">
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tblWord_type.cs">
-      <DependentUpon>DictionaryModel.tt</DependentUpon>
+      <DependentUpon>ModelDictionary.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-grid.rtl.css" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.css" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css" />
-    <Content Include="Content\bootstrap-utilities.css" />
-    <Content Include="Content\bootstrap-utilities.min.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.css" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.rtl.css" />
-    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\phong_style\p_style.css" />
     <Content Include="Content\SignUp.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DictionaryModel.Context.tt">
+    <Content Include="Models\ModelDictionary.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DictionaryModel.edmx</DependentUpon>
-      <LastGenOutput>DictionaryModel.Context.cs</LastGenOutput>
+      <DependentUpon>ModelDictionary.edmx</DependentUpon>
+      <LastGenOutput>ModelDictionary.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DictionaryModel.tt">
+    <Content Include="Models\ModelDictionary.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DictionaryModel.edmx</DependentUpon>
-      <LastGenOutput>DictionaryModel.cs</LastGenOutput>
+      <DependentUpon>ModelDictionary.edmx</DependentUpon>
+      <LastGenOutput>ModelDictionary.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\phong_style\p_style.scss" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\SignUp.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
-    <EntityDeploy Include="Models\DictionaryModel.edmx">
+    <EntityDeploy Include="Models\ModelDictionary.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DictionaryModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelDictionary.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DictionaryModel.edmx.diagram">
-      <DependentUpon>DictionaryModel.edmx</DependentUpon>
+    <Content Include="Models\ModelDictionary.edmx.diagram">
+      <DependentUpon>ModelDictionary.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\phong\phongJavaScript.js" />
     <Content Include="SQL Server\sql.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -322,31 +293,11 @@
     <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.rtl.min.css.map" />
-    <Content Include="Content\bootstrap.rtl.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.rtl.css.map" />
-    <Content Include="Content\bootstrap-utilities.min.css.map" />
-    <Content Include="Content\bootstrap-utilities.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.rtl.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="Content\bootstrap-grid.rtl.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Areas\Admin\Views\Word\SelectWords.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\InsertWord.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\UpdateWord.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\_partialWord.cshtml" />
     <None Include="packages.config" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.esm.min.js.map" />
-    <Content Include="Scripts\bootstrap.esm.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -384,7 +335,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

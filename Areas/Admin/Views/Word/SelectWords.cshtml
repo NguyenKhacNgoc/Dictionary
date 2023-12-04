@@ -1,0 +1,307 @@
+﻿@model IEnumerable<Dictionary.Models.tblWord>
+
+<a href="/Admin/Word/InsertWord">Create new</a>
+<input type="button" id="btnAddWord" value="Thêm nhanh" />
+<!--Test-->
+<!--
+    
+<select id="wordTypeID" name="wordTypeID" >
+</select>
+<button class="btnFilter">Filter</button>
+-->
+<table class="table_listword">
+    <tr>
+        <th>
+            Từ
+        </th>
+        <th>
+            Ví dụ
+        </th>
+        <th>
+            Định nghĩa
+        </th>
+        <th>
+            Ngôn ngữ
+        </th>
+        <th>
+            Dịch sang
+        </th>
+        <th>
+            Người thêm
+        </th>
+        <th>
+            Loại từ
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="@item.Id">
+            <td>
+                @item.sWord
+            </td>
+            <td>
+                @item.sExample
+            </td>
+            <td>
+                @item.sDefinition
+            </td>
+            <td>
+                @item.tblLanguage.sLanguage
+            </td>
+            <td>
+                @item.tblLanguage1.sLanguage
+            </td>
+            <td>
+                @item.tblUser.sEmail
+            </td>
+            <td>
+                @item.tblWord_type.sWordtype
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "UpdateWord", new { id = item.Id })
+                <button class="btn_delete_word" data-word-id="@item.Id">Xoá</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<style>
+    /* Tạo một khối chứa bảng để giữ cho trang trở nên thân thiện với người dùng */
+
+
+    /* Thiết kế bảng */
+    .table_listword {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        /* Thiết kế tiêu đề của bảng */
+    .table_listword th {
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        text-align: left;
+    }
+
+        /* Thiết kế hàng trong bảng */
+        .table_listword td, .table_listword th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        /* Tạo sự đổi màu khi di chuột qua các hàng */
+        .table_listword tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Thiết kế nút Edit, Details, Delete */
+        .table_listword a {
+            color: #333;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+
+            .table_listword a:hover {
+                color: #4CAF50;
+            }
+
+</style>
+
+
+<script>
+    function deleteWord() {
+        var deleteButtons = document.querySelectorAll(".btn_delete_word");
+        deleteButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (confirm("Có chắc chắn muốn xoá không")) {
+                    var wordID = button.dataset.wordId
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("DELETE", "/Admin/Word/DeleteWord");
+                    var data = JSON.stringify({ Id: wordID });
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            var element = document.getElementById(wordID);
+                            element.parentNode.removeChild(element);
+                        } else {
+                            alert("Đã có lỗi xảy ra");
+                        }
+                    };
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send(data);
+                }
+            });
+        });
+
+    }
+    function testFilterWordType() {
+        const wordTypeSelect = document.querySelector("#wordTypeID")
+        loadSelectOptions('/Admin/Word/GetWordTypes', wordTypeSelect);
+        const btnFilter = document.querySelector(".btnFilter")
+        btnFilter.addEventListener("click", function () {
+            const xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function () {
+                if (xhr.status === 200) {
+                    document.querySelector(".table_listword").innerHTML = xhr.responseText
+                    deleteWord()
+                }
+            }
+            xhr.open("GET", "/Admin/Word/filterWordType?wordTypeID=" + wordTypeSelect.value, true)
+            xhr.send()
+        })
+
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        deleteWord()
+        
+        var AddWordButton = document.getElementById("btnAddWord")
+        AddWordButton.addEventListener("click", function () {
+
+            if (AddWordButton.getAttribute("disable") != "true") {
+                AddWordButton.setAttribute("disable", "true")
+                addNewRow()
+
+            }
+
+
+        })
+    });
+    function loadSelectOptions(url, selectElement) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.status === 200) {
+                var options = JSON.parse(xhr.responseText);
+
+                // Xóa tất cả các option hiện tại
+                while (selectElement.firstChild) {
+                    selectElement.removeChild(selectElement.firstChild);
+                }
+
+                // Thêm option mới từ dữ liệu nhận được
+                options.forEach(function (option) {
+                    var optionElement = document.createElement('option');
+                    optionElement.value = option.value;
+                    optionElement.text = option.text;
+                    selectElement.appendChild(optionElement);
+                });
+            }
+        };
+
+        xhr.open('GET', url, true);
+        xhr.send();
+    }
+
+    function addNewRow() {
+        var table = document.querySelector(".table_listword");
+        var newRow = table.insertRow(-1); // -1 để chèn vào cuối cùng
+
+        // Thêm các ô input vào hàng mới
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
+        var cell7 = newRow.insertCell(6);
+        var cell8 = newRow.insertCell(7);
+
+
+
+        cell1.innerHTML = '<input type="text" placeholder="Nhấp vào đây" id="sWord" name="sWord" />';
+        cell2.innerHTML = '<textarea type="text" placeholder="Nhấp vào đây" id="sExample" name="sExample" ></textarea>';
+        cell3.innerHTML = '<textarea type="text" placeholder="Nhấp vào đây" id="sDefinition" name="sDefinition" ></textarea>';
+        cell4.innerHTML = '<select id="Id_Language" name="Id_Language"></select>';
+        cell5.innerHTML = '<select id="Id_Language_trans" name="Id_Language_trans"></select>';
+        cell6.innerHTML = '<select id="Id_user" name="Id_user"></select>';
+        cell7.innerHTML = '<select id="Id_wordtype" name="Id_wordtype"></select>';
+
+        cell8.innerHTML = '<button class="btnOk_AddNhanh">Ok</button> <button class="btnCancel_AddNhanh">Cancel</button>';
+
+        // Lấy các thẻ select
+        var languageSelect = document.querySelector('#Id_Language');
+        var languageSelectTrans = document.querySelector("#Id_Language_trans")
+        var wordTypeSelect = document.querySelector('#Id_wordtype');
+
+        // Gọi hàm để lấy dữ liệu và điền vào các select
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelect);
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelectTrans);
+        loadSelectOptions('/Admin/Word/GetWordTypes', wordTypeSelect);
+        const loggedUser = 'LoggedUser'
+        var json_cookie = getCookie(loggedUser);
+        if (json_cookie != null && json_cookie.trim() !== "") {
+            // Xóa tất cả các option hiện tại
+            var selectUser = document.querySelector("#Id_user")
+            while (selectUser.firstChild) {
+                selectUser.removeChild(selectUser.firstChild);
+            }
+            var optionElement = document.createElement('option');
+            optionElement.value = JSON.parse(json_cookie).Id
+            optionElement.text = JSON.parse(json_cookie).sEmail
+            selectUser.appendChild(optionElement);
+        }
+        var btnCancel_AddNhanh = document.querySelector(".btnCancel_AddNhanh")
+        btnCancel_AddNhanh.addEventListener("click", function () {
+            newRow.parentNode.removeChild(newRow)
+            var AddWordButton = document.getElementById("btnAddWord")
+            AddWordButton.setAttribute("disable", "false")
+
+
+
+        })
+        var btnOk_AddNhanh = document.querySelector(".btnOk_AddNhanh")
+        btnOk_AddNhanh.addEventListener("click", function () {
+            var sExample = document.getElementById("sExample").value;
+            var sDefinition = document.getElementById("sDefinition").value;
+            var Id_Language = document.getElementById("Id_Language").value;
+            var Id_Language_trans = document.getElementById("Id_Language_trans").value;
+            var Id_wordtype = document.getElementById("Id_wordtype").value;
+            var Id_user = document.getElementById("Id_user").value;
+            var sWord = document.getElementById("sWord").value
+
+            var data = {
+                Id_Language: Id_Language,
+                Id_Language_trans: Id_Language_trans,
+                Id_wordtype: Id_wordtype,
+                Id_user: Id_user,
+                sWord: sWord,
+                sExample: sExample,
+                sDefinition: sDefinition,
+
+
+
+            };
+            var xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function () {
+                if (xhr.status === 200) {
+                    location.reload()
+                }
+                else console.log(xhr.responseText.message)
+            }
+            xhr.open("POST", "/Admin/Word/InsertWord", true)
+            xhr.setRequestHeader('Content-Type', 'application/json')
+            xhr.send(JSON.stringify(data))
+
+        })
+    }
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
+</script>
+
+

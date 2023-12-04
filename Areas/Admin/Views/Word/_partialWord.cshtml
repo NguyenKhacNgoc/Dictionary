@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Dictionary.Models.tblWord>
+<table class="table_listword">
+    <tr>
+        <th>
+            Từ
+        </th>
+        <th>
+            Ví dụ
+        </th>
+        <th>
+            Định nghĩa
+        </th>
+        <th>
+            Ngôn ngữ
+        </th>
+        <th>
+            Dịch sang
+        </th>
+        <th>
+            Người thêm
+        </th>
+        <th>
+            Loại từ
+        </th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="@item.Id">
+            <td>
+                @item.sWord
+            </td>
+            <td>
+                @item.sExample
+            </td>
+            <td>
+                @item.sDefinition
+            </td>
+            <td>
+                @item.tblLanguage.sLanguage
+            </td>
+            <td>
+                @item.tblLanguage1.sLanguage
+            </td>
+            <td>
+                @item.tblUser.sEmail
+            </td>
+            <td>
+                @item.tblWord_type.sWordtype
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "UpdateWord", new { id = item.Id })
+                <button class="btn_delete_word" data-word-id="@item.Id">Xoá</button>
+            </td>
+        </tr>
+    }
+
+</table>
+
