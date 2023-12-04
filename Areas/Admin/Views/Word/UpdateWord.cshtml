@@ -3,7 +3,7 @@
     <label>Từ</label>
     <input type="text" id="sWord" name="sWord" placeholder="Từ" value="@Model.sWord" disabled/>
     <label>Ví dụ</label>
-    <textarea type="text" id="sExample" name="sExample" placeholder="Ví dụ"></textarea>
+    <textarea type="text" id="sExample" name="sExample" placeholder="Ví dụ" value="@Model.sExample"></textarea>
     <label>Định nghĩa</label>
     <textarea type="text" id="sDefinition" name="sDefinition" placeholder="Định nghĩa"></textarea>
     <label>Ngôn ngữ</label>
@@ -92,9 +92,9 @@
         
        
         // Gọi hàm để lấy dữ liệu và điền vào các select
-        loadSelectOptions('/Admin/tblWord/GetLanguage', languageSelect);
-        loadSelectOptions('/Admin/tblWord/GetLanguage', languageSelectTrans);
-        loadSelectOptions('/Admin/tblWord/GetWordTypes', wordTypeSelect);
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelect);
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelectTrans);
+        loadSelectOptions('/Admin/Word/GetWordTypes', wordTypeSelect);
 
         
         //Xử lý call api để cập nhật dữ liệu
@@ -118,8 +118,7 @@
                 sExample: sExample,
                 sDefinition: sDefinition,
                 
-                
-                
+                    
             };
             var xhr = new XMLHttpRequest()
             xhr.onreadystatechange = function () {
@@ -128,7 +127,7 @@
                 }
                 else console.log(xhr.responseText.message)
             }
-            xhr.open("PUT", "/Admin/tblWord/UpdateWord", true)
+            xhr.open("POST", "/Admin/Word/UpdateWord", true)
             xhr.setRequestHeader('Content-Type', 'application/json')
             xhr.send(JSON.stringify(data))
 

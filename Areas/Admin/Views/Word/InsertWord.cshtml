@@ -1,5 +1,5 @@
 ﻿@model Dictionary.Models.tblWord
-<form action="/Admin/tblWord/InsertWord" method="post">
+<form action="/Admin/Word/InsertWord" method="post">
     <label>Từ</label>
     <input type="text" id="sWord" name="sWord" placeholder="Từ" />
     <label>Ví dụ</label>
@@ -15,6 +15,8 @@
     <label>Loại từ</label>
     <select id="Id_wordtype" name="Id_wordtype">
     </select>
+    <label>Người thêm</label>
+    <select id="Id_user" name="Id_user">
         @if (Request.Cookies["LoggedUser"] != null)
         {
             var userCookie = Request.Cookies["LoggedUser"].Value;
@@ -99,9 +101,9 @@
         var wordTypeSelect = document.querySelector('#Id_wordtype');
 
         // Gọi hàm để lấy dữ liệu và điền vào các select
-        loadSelectOptions('/Admin/tblWord/GetLanguage', languageSelect);
-        loadSelectOptions('/Admin/tblWord/GetLanguage', languageSelectTrans);
-        loadSelectOptions('/Admin/tblWord/GetWordTypes', wordTypeSelect);
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelect);
+        loadSelectOptions('/Admin/Word/GetLanguage', languageSelectTrans);
+        loadSelectOptions('/Admin/Word/GetWordTypes', wordTypeSelect);
     });
 
     // Hàm để gửi yêu cầu Ajax và điền dữ liệu vào select

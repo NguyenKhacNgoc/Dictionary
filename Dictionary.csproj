@@ -196,9 +196,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\tblUsersController.cs" />
-    <Compile Include="Areas\Admin\Controllers\tblWordController.cs" />
     <Compile Include="Areas\Admin\Controllers\WordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -515,9 +513,9 @@
     <Content Include="Areas\Admin\Views\Word\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Word\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\tblWord\InsertWord.cshtml" />
-    <Content Include="Areas\Admin\Views\tblWord\SelectWords.cshtml" />
-    <Content Include="Areas\Admin\Views\tblWord\UpdateWord.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\InsertWord.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\SelectWords.cshtml" />
+    <Content Include="Areas\Admin\Views\Word\UpdateWord.cshtml" />
     <EntityDeploy Include="Models\DictionaryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>DictionaryModel.Designer.cs</LastGenOutput>
@@ -530,7 +528,6 @@
     <Content Include="Areas\Admin\Views\tblUsers\Details.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\tblUsers\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <None Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.js" />
     <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.min.js" />

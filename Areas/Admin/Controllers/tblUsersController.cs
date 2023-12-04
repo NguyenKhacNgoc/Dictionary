@@ -118,6 +118,27 @@ namespace Dictionary.Areas.Admin.Controllers
             return View(tblUser);
         }
 
+
+        [HttpDelete]
+        public JsonResult DeleteWord(int Id)
+        {
+            DictionaryEntities db = new DictionaryEntities();
+            tblWord word = db.tblWords.Where(row => row.Id == Id).FirstOrDefault();
+            if (word != null)
+            {
+                db.tblWords.Remove(word);
+                db.SaveChanges();
+                Response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                return Json(new { message = "Xoá thành công" });
+
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                return Json(new { error = "Không tồn tại từ này" });
+            }
+        }
+
         // POST: Admin/tblUsers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
